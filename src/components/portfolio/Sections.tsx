@@ -78,7 +78,7 @@ function ProjectVisual({ id }: { id: string }) {
 
 export function Projects() {
   const [active, setActive] = useState(0);
-  const p = projects[active];
+  const p = projects[active] ?? projects[0]!;
   return (
     <section id="projects" className="relative overflow-hidden px-5 py-28 md:py-36">
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/3 -z-0 h-[500px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]" />
