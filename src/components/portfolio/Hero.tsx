@@ -6,7 +6,7 @@ export function Hero() {
     <section id="top" className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden bg-hero px-5">
       <Starfield />
       {/* Planet rim light on the right, as in the reference */}
-      <div aria-hidden className="pointer-events-none absolute left-[78%] top-1/2 h-[130vmax] w-[130vmax] -translate-y-1/2 rounded-full bg-planet" />
+      <div aria-hidden className="pointer-events-none absolute left-[94%] top-1/2 md:left-[78%] h-[130vmax] w-[130vmax] -translate-y-1/2 rounded-full bg-planet" />
       <div aria-hidden className="pointer-events-none absolute right-[-10vmax] top-1/2 h-[90vmax] w-[30vmax] -translate-y-1/2 rounded-full bg-glow/10 blur-[120px]" />
       {/* Orbit line with satellites */}
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 h-[min(900px,120vw)] w-[min(900px,120vw)] -translate-x-1/2 -translate-y-[45%] animate-orbit rounded-full border border-foreground/10">
