@@ -214,7 +214,7 @@ export function Contact() {
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-[70%] -z-10 aspect-square w-[160vmax] -translate-x-1/2 rotate-90 rounded-full bg-planet" />
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[700px] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow/10 blur-[120px]" />
       <Reveal className="mx-auto max-w-[760px] text-center">
-        <h2 className="text-glow text-[clamp(2.2rem,5.5vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em]">Let's build something together.</h2>
+        <h2 className="text-halo text-[clamp(2.2rem,5.5vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em]">Let's build something together.</h2>
         <p className="mx-auto mt-6 max-w-[520px] text-lg text-muted-foreground">Open to full-stack, frontend and mobile developer roles.</p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[17px] font-medium text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">

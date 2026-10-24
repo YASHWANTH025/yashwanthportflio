@@ -89,7 +89,7 @@
   ::selection { background: oklch(0.82 0.06 265 / 0.35); }
 }
 
-@utility text-glow { text-shadow: var(--shadow-text); }
+@utility text-halo { text-shadow: var(--shadow-text); }
 @utility text-gradient {
   background: var(--gradient-text);
   -webkit-background-clip: text;

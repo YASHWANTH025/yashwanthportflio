@@ -17,11 +17,11 @@ export function Hero() {
         ))}
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[920px] pt-24 text-center">
+      <div className="relative z-10 mx-auto max-w-[1000px] pt-24 text-center">
         <p className="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-1.5 text-sm text-muted-foreground" data-visible="true">
           <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-glow" /> {profile.name} · {profile.location.split(",")[0]}
         </p>
-        <h1 className="text-glow text-[clamp(2.6rem,7vw,5.6rem)] font-normal leading-[1.05] tracking-[-0.02em] text-foreground">
+        <h1 className="text-halo text-[clamp(2.6rem,7vw,5.6rem)] font-normal leading-[1.05] tracking-[-0.02em] text-foreground">
           A full-stack developer who makes ideas{" "}
           <span className="relative inline-block text-foreground/80">
             ship
