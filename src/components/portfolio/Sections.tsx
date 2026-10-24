@@ -9,7 +9,7 @@ function Eyebrow({ children }: { children: string }) {
   return <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-accent">{children}</p>;
 }
 function H2({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-gradient text-[clamp(2rem,4.5vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.025em]">{children}</h2>;
+  return <h2 className="text-gradient text-[clamp(2rem,4.5vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em]">{children}</h2>;
 }
 
 export function About() {
@@ -211,7 +211,7 @@ export function Skills() {
 export function Contact() {
   return (
     <section id="contact" className="relative isolate overflow-hidden px-5 py-32 md:py-44">
-      <div aria-hidden className="pointer-events-none absolute left-1/2 top-[55%] -z-10 aspect-square w-[160vmax] -translate-x-1/2 rounded-full bg-planet" style={{ backgroundPosition: "center" }} />
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-[70%] -z-10 aspect-square w-[160vmax] -translate-x-1/2 rotate-90 rounded-full bg-planet" />
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[700px] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow/10 blur-[120px]" />
       <Reveal className="mx-auto max-w-[760px] text-center">
         <h2 className="text-glow text-[clamp(2.2rem,5.5vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em]">Let's build something together.</h2>

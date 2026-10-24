@@ -6,7 +6,7 @@ export function Hero() {
     <section id="top" className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden bg-hero px-5">
       <Starfield />
       {/* Planet rim light on the right, as in the reference */}
-      <div aria-hidden className="pointer-events-none absolute -right-[55vmax] top-1/2 -z-0 h-[140vmax] w-[140vmax] -translate-y-1/2 rounded-full bg-planet opacity-90 blur-[1px]" />
+      <div aria-hidden className="pointer-events-none absolute left-[78%] top-1/2 h-[130vmax] w-[130vmax] -translate-y-1/2 rounded-full bg-planet" />
       <div aria-hidden className="pointer-events-none absolute right-[-10vmax] top-1/2 h-[90vmax] w-[30vmax] -translate-y-1/2 rounded-full bg-glow/10 blur-[120px]" />
       {/* Orbit line with satellites */}
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 h-[min(900px,120vw)] w-[min(900px,120vw)] -translate-x-1/2 -translate-y-[45%] animate-orbit rounded-full border border-foreground/10">
@@ -21,7 +21,7 @@ export function Hero() {
         <p className="reveal mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-1.5 text-sm text-muted-foreground" data-visible="true">
           <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-glow" /> {profile.name} · {profile.location.split(",")[0]}
         </p>
-        <h1 className="text-glow text-[clamp(2.6rem,7vw,5.6rem)] font-normal leading-[1.05] tracking-[-0.03em] text-foreground">
+        <h1 className="text-glow text-[clamp(2.6rem,7vw,5.6rem)] font-normal leading-[1.05] tracking-[-0.02em] text-foreground">
           A full-stack developer who makes ideas{" "}
           <span className="relative inline-block text-foreground/80">
             ship
