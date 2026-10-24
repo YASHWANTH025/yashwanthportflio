@@ -14,7 +14,7 @@ function H2({ children }: { children: React.ReactNode }) {
 
 export function About() {
   return (
-    <section id="about" className="relative bg-section px-5 py-28 md:py-36">
+    <section id="about" className="relative overflow-hidden bg-section px-5 py-28 md:py-36">
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="mx-auto max-w-[760px] text-center">
           <Eyebrow>About</Eyebrow>
@@ -80,7 +80,7 @@ export function Projects() {
   const [active, setActive] = useState(0);
   const p = projects[active];
   return (
-    <section id="projects" className="relative px-5 py-28 md:py-36">
+    <section id="projects" className="relative overflow-hidden px-5 py-28 md:py-36">
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/3 -z-0 h-[500px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]" />
       <div className="relative mx-auto max-w-[1280px]">
         <Reveal className="max-w-[700px]">
