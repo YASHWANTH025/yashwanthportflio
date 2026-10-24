@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Portfolio content lives in `src/lib/resume.ts`; sections in `src/components/portfolio/` read from it so resume edits never touch layout code.
+- Don't name custom utilities `text-<token>` when a `--color-<token>` exists — Tailwind treats it as a text color (e.g. use `text-halo`, not `text-glow`).
