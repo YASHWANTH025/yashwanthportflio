@@ -1,4 +1,4 @@
-import { Suspense, lazy, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { Component, Suspense, lazy, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useCinematicScroll } from "./use-cinematic-scroll";
 import { ArrowDown, ArrowRight, Download, Mail, Menu, Phone, X } from "lucide-react";
 
@@ -122,6 +122,29 @@ function TechnicalVisual({ projectId }: { projectId: string }) {
 
 const HeroScene = lazy(() => import("./hero-scene"));
 
+function hasWebGL() {
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    if (!gl) return false;
+    (gl as WebGLRenderingContext).getExtension("WEBGL_lose_context")?.loseContext();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+class SceneBoundary extends Component<{ fallback: ReactNode; children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  componentDidCatch() {}
+  render() {
+    return this.state.failed ? this.props.fallback : this.props.children;
+  }
+}
+
 const ACCENT_WORDS = new Set(["ideas", "ship."]);
 
 function HeroWords({ text }: { text: string }) {
@@ -175,7 +198,7 @@ export function PortfolioPage() {
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setUse3D(!reduced && window.innerWidth >= 768);
+    setUse3D(!reduced && window.innerWidth >= 768 && hasWebGL());
     const fallback = window.setTimeout(() => setReady(true), 2500);
     return () => window.clearTimeout(fallback);
   }, []);
@@ -257,9 +280,11 @@ export function PortfolioPage() {
       <section id="top" className="hero-section">
         <div className="hero-bg" aria-hidden="true">
           {use3D ? (
-            <Suspense fallback={<SystemCanvas />}>
-              <HeroScene />
-            </Suspense>
+            <SceneBoundary fallback={<SystemCanvas />}>
+              <Suspense fallback={<SystemCanvas />}>
+                <HeroScene />
+              </Suspense>
+            </SceneBoundary>
           ) : (
             <SystemCanvas />
           )}
