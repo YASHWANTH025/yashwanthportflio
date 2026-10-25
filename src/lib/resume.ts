@@ -20,36 +20,42 @@ export type Project = { id: string; title: string; tagline: string; stack: strin
 
 export const projects: Project[] = [
   {
-    id: "resumeai",
-    title: "ResumeAI",
-    tagline: "AI-powered resume analyzer",
-    stack: ["React.js", "JavaScript", "Node.js", "Express.js"],
-    points: [
-      "Compares resumes with target job roles to surface relevant skills, missing keywords, and skill gaps.",
-      "ATS-style scoring, prompt-based recommendations, insights dashboards, and REST API integration.",
-      "Interactive dashboard presenting analysis results and actionable recommendations.",
-    ],
-  },
-  {
     id: "insight",
     title: "Insight Tracker",
     tagline: "Offline-first expense & habit tracker",
     stack: ["Flutter", "Dart", "Drift", "SQLite", "Riverpod", "Supabase"],
     points: [
-      "Expense logging, category filtering, search, CSV export, daily habits, and streak tracking.",
-      "Insights for monthly spending, top categories, 7-day habit completion, and six-month trends.",
-      "Supabase email auth and cloud sync with Row Level Security, while local data stays available offline.",
+      "Expense logging with category-based filtering, search, and CSV export.",
+      "Habit and streak tracking with daily completion insights.",
+      "Spending insights: monthly totals, top categories, and six-month trends.",
+      "Supabase authentication with cloud sync and Row Level Security.",
+      "Fully offline-first — local data stays available without a connection.",
     ],
   },
   {
     id: "portal",
     title: "Annual Report Portal",
     tagline: "Full-stack university reporting system",
-    stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "MySQL"],
+    stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "MySQL", "Chart.js"],
     points: [
-      "Collects, validates, manages, and organizes university departmental data.",
-      "Role-based authentication, responsive interfaces, backend validation, search, and filtering.",
-      "Chart.js dashboards and automated PDF/Excel report generation.",
+      "Departmental data collection, validation, and management.",
+      "Role-based authentication with backend validation.",
+      "Search and filtering across university records.",
+      "Chart.js dashboard visualizations.",
+      "Automated PDF and Excel report generation.",
+    ],
+  },
+  {
+    id: "resumeai",
+    title: "ResumeAI",
+    tagline: "AI-powered resume analyzer",
+    stack: ["React.js", "JavaScript", "Node.js", "Express.js", "REST APIs"],
+    points: [
+      "Compares resumes against target job roles.",
+      "Identifies matched skills and missing keywords.",
+      "Skill-gap analysis with ATS-style scoring.",
+      "Prompt-based recommendations through REST APIs.",
+      "Insights dashboard presenting analysis results.",
     ],
   },
 ];

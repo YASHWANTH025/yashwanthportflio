@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Award, GraduationCap, Mail, MapPin, Phone, Trophy } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { AssistantDemo } from "./AssistantDemo";
@@ -21,7 +21,7 @@ export function About() {
           <H2>I build products that explain themselves.</H2>
           <p className="mx-auto mt-6 max-w-[620px] text-lg leading-relaxed text-muted-foreground">{profile.summary}</p>
         </Reveal>
-        <Reveal className="mt-16" delay={150}>
+        <Reveal className="mt-16" delay={150} variant="mask">
           <AssistantDemo />
         </Reveal>
       </div>
@@ -76,9 +76,59 @@ function ProjectVisual({ id }: { id: string }) {
   );
 }
 
+function ProjectBlock({ p, index, total }: { p: (typeof projects)[number]; index: number; total: number }) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e?.isIntersecting) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <article ref={ref} data-visible={visible} className="project-block border-t border-border py-20 md:py-28">
+      <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className={cn(index % 2 === 1 && "lg:order-2")}>
+          <p className="reveal-fade font-mono text-sm text-muted-foreground" data-visible={visible}>
+            0{index + 1} — 0{total}
+          </p>
+          <h3 className="text-gradient mt-4 text-[clamp(1.9rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">{p.title}</h3>
+          <p className="mt-3 text-lg text-muted-foreground">{p.tagline}</p>
+          <ol className="mt-9 space-y-4">
+            {p.points.map((pt, fi) => (
+              <li key={pt} className="project-feature flex gap-4 text-[15px] leading-relaxed text-foreground/85" style={{ transitionDelay: `${200 + fi * 110}ms` }}>
+                <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">{String(fi + 1).padStart(2, "0")}</span>
+                {pt}
+              </li>
+            ))}
+          </ol>
+          <div className="project-feature mt-9 flex flex-wrap gap-2" style={{ transitionDelay: `${200 + p.points.length * 110}ms` }}>
+            {p.stack.map((s) => (
+              <span key={s} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{s}</span>
+            ))}
+          </div>
+        </div>
+        <div className={cn("project-visual-sticky", index % 2 === 1 && "lg:order-1")}>
+          <div className="project-visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-10">
+            <div className="animate-float"><ProjectVisual id={p.id} /></div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export function Projects() {
-  const [active, setActive] = useState(0);
-  const p = projects[active] ?? projects[0]!;
   return (
     <section id="projects" className="relative overflow-hidden px-5 py-28 md:py-36">
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/3 -z-0 h-[500px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]" />
@@ -87,47 +137,10 @@ export function Projects() {
           <Eyebrow>Projects</Eyebrow>
           <H2>Selected work, end to end.</H2>
         </Reveal>
-        <div className="mt-14 grid gap-8 lg:grid-cols-[380px_1fr]">
-          <div role="tablist" aria-label="Projects" className="flex gap-3 overflow-x-auto lg:flex-col lg:overflow-visible">
-            {projects.map((proj, i) => (
-              <button
-                key={proj.id}
-                role="tab"
-                aria-selected={i === active}
-                aria-controls={`panel-${proj.id}`}
-                onClick={() => setActive(i)}
-                className={cn(
-                  "min-w-[240px] rounded-2xl border p-5 text-left transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                  i === active ? "border-foreground/25 bg-card-grad shadow-card" : "border-border hover:border-foreground/15",
-                )}
-              >
-                <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
-                <p className="mt-2 text-xl font-medium">{proj.title}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{proj.tagline}</p>
-              </button>
-            ))}
-          </div>
-          <article id={`panel-${p.id}`} role="tabpanel" key={p.id} className="animate-in fade-in slide-in-from-bottom-2 duration-500 rounded-3xl border border-border bg-surface p-6 shadow-card md:p-10">
-            <div className="grid items-center gap-10 md:grid-cols-2">
-              <div>
-                <h3 className="text-3xl font-normal tracking-tight">{p.title}</h3>
-                <p className="mt-2 text-muted-foreground">{p.tagline}</p>
-                <ul className="mt-6 space-y-3">
-                  {p.points.map((pt) => (
-                    <li key={pt} className="flex gap-3 text-[15px] leading-relaxed text-foreground/85">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" /> {pt}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {p.stack.map((s) => (
-                    <span key={s} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{s}</span>
-                  ))}
-                </div>
-              </div>
-              <div className="animate-float"><ProjectVisual id={p.id} /></div>
-            </div>
-          </article>
+        <div className="mt-6">
+          {projects.map((p, i) => (
+            <ProjectBlock key={p.id} p={p} index={i} total={projects.length} />
+          ))}
         </div>
       </div>
     </section>
@@ -176,7 +189,7 @@ export function Skills() {
         </Reveal>
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((g, i) => (
-            <Reveal key={g.group} delay={i * 70} className="rounded-2xl border border-border bg-card-grad p-6 transition-colors hover:border-foreground/20">
+            <Reveal key={g.group} delay={i * 70} className="card-hover rounded-2xl border border-border bg-card-grad p-6 hover:border-foreground/20">
               <h3 className="text-lg font-medium">{g.group}</h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {g.items.map((s) => <span key={s} className="rounded-md bg-secondary px-2.5 py-1 text-sm text-foreground/85">{s}</span>)}
