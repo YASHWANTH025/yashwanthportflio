@@ -20,17 +20,6 @@ export type Project = { id: string; title: string; tagline: string; stack: strin
 
 export const projects: Project[] = [
   {
-    id: "resumeai",
-    title: "ResumeAI",
-    tagline: "AI-powered resume analyzer",
-    stack: ["React.js", "JavaScript", "Node.js", "Express.js"],
-    points: [
-      "Compares resumes with target job roles to surface relevant skills, missing keywords, and skill gaps.",
-      "ATS-style scoring, prompt-based recommendations, insights dashboards, and REST API integration.",
-      "Interactive dashboard presenting analysis results and actionable recommendations.",
-    ],
-  },
-  {
     id: "insight",
     title: "Insight Tracker",
     tagline: "Offline-first expense & habit tracker",
@@ -45,11 +34,22 @@ export const projects: Project[] = [
     id: "portal",
     title: "Annual Report Portal",
     tagline: "Full-stack university reporting system",
-    stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "MySQL"],
+    stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "MySQL", "Chart.js"],
     points: [
       "Collects, validates, manages, and organizes university departmental data.",
       "Role-based authentication, responsive interfaces, backend validation, search, and filtering.",
       "Chart.js dashboards and automated PDF/Excel report generation.",
+    ],
+  },
+  {
+    id: "resumeai",
+    title: "ResumeAI",
+    tagline: "AI-powered resume analyzer",
+    stack: ["React.js", "JavaScript", "Node.js", "Express.js", "REST APIs"],
+    points: [
+      "Compares resumes with target job roles to surface relevant skills, missing keywords, and skill gaps.",
+      "ATS-style scoring, prompt-based recommendations, insights dashboards, and REST API integration.",
+      "Interactive dashboard presenting analysis results and actionable recommendations.",
     ],
   },
 ];
