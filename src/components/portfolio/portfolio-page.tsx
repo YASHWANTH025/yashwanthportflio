@@ -135,12 +135,12 @@ function hasWebGL() {
 }
 
 class SceneBoundary extends Component<{ fallback: ReactNode; children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
+  override state = { failed: false };
   static getDerivedStateFromError() {
     return { failed: true };
   }
-  componentDidCatch() {}
-  render() {
+  override componentDidCatch() {}
+  override render() {
     return this.state.failed ? this.props.fallback : this.props.children;
   }
 }
