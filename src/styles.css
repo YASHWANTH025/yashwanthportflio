@@ -643,3 +643,32 @@ body {
   .focus-marquee { animation: none; }
   .hero-bg canvas { transform: none; }
 }
+
+/* ===== Editorial scroll storytelling layer ===== */
+.site-mark__text, .opening-mark { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; letter-spacing: -.02em; }
+.opening-mark { font-size: 3rem; animation: logo-arrive .9s cubic-bezier(.2,.7,.2,1) both; }
+.experience-entry { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; grid-column: span 12; }
+.experience-entry + .experience-entry { margin-top: 3rem; }
+.achievement-list { margin-top: 2.5rem; list-style: none; padding: 0; }
+.achievement-list li { border-top: 1px solid var(--border); padding: 1rem 0; color: var(--muted-foreground); }
+.project-features { margin-top: 2rem; list-style: none; padding: 0; max-width: 36rem; }
+.project-features li { display: grid; grid-template-columns: 2.5rem 1fr; gap: .5rem; padding: 1rem 0; border-top: 1px solid oklch(0.18 0.008 55 / 18%); line-height: 1.65; opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.project-features li span { color: oklch(0.52 0.09 48); font-size: .7rem; padding-top: .3rem; }
+.project-block.is-visible .project-features li { opacity: 1; transform: none; }
+.project-block.is-visible .project-features li:nth-child(2) { transition-delay: .12s; }
+.project-block.is-visible .project-features li:nth-child(3) { transition-delay: .24s; }
+/* Masked image reveal: visual unclips from bottom as it enters */
+.project-visual-sticky { position: relative; overflow: hidden; }
+.project-visual-sticky .technical-visual { clip-path: inset(100% 0 0 0); transition: clip-path 1.3s cubic-bezier(.77,0,.18,1), transform 1.1s ease, filter 1.1s ease !important; }
+.project-block.is-visible .project-visual-sticky .technical-visual { clip-path: inset(0 0 0 0); }
+@media (min-width: 1024px) {
+  .project-visual-sticky { position: sticky; top: 96px; align-self: start; }
+  .project-block--reverse .project-visual-sticky { order: 2; }
+  .project-block--reverse .project-copy { order: 1; }
+}
+.nav-link::after { transition: right .45s cubic-bezier(.2,.7,.2,1); }
+.nav-link:hover::after { right: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .project-visual-sticky .technical-visual { clip-path: none; }
+  .project-features li { opacity: 1; transform: none; }
+}

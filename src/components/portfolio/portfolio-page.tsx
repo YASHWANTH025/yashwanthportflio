@@ -344,15 +344,23 @@ export function PortfolioPage() {
         </div>
         {projects.map((project, index) => (
           <article className={index % 2 ? "project-block project-block--reverse" : "project-block"} data-reveal key={project.id}>
-            <TechnicalVisual projectId={project.id} />
+            <div className="project-visual-sticky">
+              <TechnicalVisual projectId={project.id} />
+            </div>
             <div className="project-copy">
               <div>
                 <span>Project 0{index + 1}</span>
                 <span>{project.tagline}</span>
               </div>
               <h3>{project.title}</h3>
-              <p>{project.points[0]}</p>
-              <p>{project.points[1]}</p>
+              <ul className="project-features">
+                {project.points.map((point, i) => (
+                  <li key={point}>
+                    <span>{String(i + 1).padStart(2, "0")}</span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
               <p className="project-stack">{project.stack.join(" · ")}</p>
             </div>
           </article>
