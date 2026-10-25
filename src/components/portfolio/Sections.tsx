@@ -21,7 +21,7 @@ export function About() {
           <H2>I build products that explain themselves.</H2>
           <p className="mx-auto mt-6 max-w-[620px] text-lg leading-relaxed text-muted-foreground">{profile.summary}</p>
         </Reveal>
-        <Reveal className="mt-16" delay={150}>
+        <Reveal className="mt-16" delay={150} variant="mask">
           <AssistantDemo />
         </Reveal>
       </div>
@@ -189,7 +189,7 @@ export function Skills() {
         </Reveal>
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((g, i) => (
-            <Reveal key={g.group} delay={i * 70} className="rounded-2xl border border-border bg-card-grad p-6 transition-colors hover:border-foreground/20">
+            <Reveal key={g.group} delay={i * 70} className="card-hover rounded-2xl border border-border bg-card-grad p-6 hover:border-foreground/20">
               <h3 className="text-lg font-medium">{g.group}</h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {g.items.map((s) => <span key={s} className="rounded-md bg-secondary px-2.5 py-1 text-sm text-foreground/85">{s}</span>)}
