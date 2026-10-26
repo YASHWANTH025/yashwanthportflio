@@ -32,23 +32,16 @@ export function Hero() {
         </p>
         <h1 className="text-halo text-[clamp(2.6rem,7vw,5.6rem)] font-normal leading-[1.05] tracking-[-0.02em] text-foreground">
           <span className="hero-line">
-            <span style={{ animationDelay: "0.15s" }}>A full-stack developer</span>
+            <span style={{ animationDelay: "0.15s" }}>Turning Ideas</span>
           </span>
           <span className="hero-line">
-            <span style={{ animationDelay: "0.3s" }}>
-              who makes ideas{" "}
-              <span className="relative inline-block text-foreground/80">
-                ship
-                <span aria-hidden className="absolute -bottom-1 left-0 h-px w-full bg-gradient-to-r from-transparent via-foreground/70 to-transparent" />
-              </span>
-              .
-            </span>
+            <span style={{ animationDelay: "0.3s" }}>Into Reality.</span>
           </span>
         </h1>
         <p className="hero-fade mx-auto mt-7 max-w-[620px] text-[clamp(1rem,1.6vw,1.3rem)] leading-relaxed text-muted-foreground" style={{ animationDelay: "0.5s" }}>
           IT graduate building web apps, offline-first mobile apps, REST APIs and AI-enabled tools with React, Node.js, Java and Flutter.
         </p>
-        <div className="hero-fade mt-10 flex flex-wrap items-center justify-center gap-3" style={{ animationDelay: "0.65s" }}>
+        <div className="hero-fade mt-10 mb-28 flex flex-wrap items-center justify-center gap-3" style={{ animationDelay: "0.65s" }}>
           <a href="#projects" className="rounded-xl bg-primary px-7 py-3.5 text-[17px] font-medium text-primary-foreground shadow-glow transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
             View my work
           </a>
@@ -59,7 +52,7 @@ export function Hero() {
       </div>
 
       <div aria-hidden className="hero-fade pointer-events-none absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3" style={{ animationDelay: "1.2s" }}>
-        <span className="text-[11px] uppercase tracking-[0.24em] text-muted-foreground">Scroll</span>
+        <span className="whitespace-nowrap text-[11px] uppercase tracking-[0.24em] text-muted-foreground">Scroll to explore</span>
         <span className="scroll-indicator" />
       </div>
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
