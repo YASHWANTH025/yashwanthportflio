@@ -17,7 +17,7 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
       return;
     }
     const video = videoRef.current;
-    if (video) void video.play().catch(() => { /* Skip remains available when autoplay is blocked. */ });
+    if (video) void video.play().then(() => setStarted(true)).catch(() => { /* Skip remains available when autoplay is blocked. */ });
     const timeout = window.setTimeout(finish, 30000);
     const handlePreference = () => { if (preference.matches) setPhase("done"); };
     preference.addEventListener("change", handlePreference);
@@ -53,6 +53,7 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
               disablePictureInPicture
               aria-label="Cinematic 3D opening animation"
               onPlaying={() => setStarted(true)}
+              onTimeUpdate={() => setStarted(true)}
               onEnded={finish}
               onError={finish}
             >
