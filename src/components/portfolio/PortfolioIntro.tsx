@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import introAsset from "@/assets/portfolio-intro.mp4.asset.json";
+import compatibleIntroAsset from "@/assets/portfolio-intro.webm.asset.json";
 
 export function PortfolioIntro({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<"playing" | "leaving" | "done">("playing");
@@ -48,14 +49,16 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
             <video
               ref={videoRef}
               className="portfolio-intro__video"
-              src={introAsset.url}
               autoPlay muted playsInline preload="auto"
               disablePictureInPicture
               aria-label="Cinematic 3D opening animation"
               onPlaying={() => setStarted(true)}
               onEnded={finish}
               onError={finish}
-            />
+            >
+              <source src={introAsset.url} type="video/mp4" />
+              <source src={compatibleIntroAsset.url} type="video/webm" />
+            </video>
             <p className="portfolio-intro__name" data-started={started}>YASHWANTH A M</p>
           </div>
           <Button variant="ghost" className="portfolio-intro__skip" onClick={finish}>
