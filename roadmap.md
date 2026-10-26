@@ -1,0 +1,2 @@
+- [x] Add the uploaded video opening with name, skip, smooth exit and failure safeguards.
+- [x] Verify playback, automatic exit, skip, reduced motion and mobile layout.
