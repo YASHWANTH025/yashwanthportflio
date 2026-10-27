@@ -1,4 +1,4 @@
 - [x] Add the uploaded video opening with name, skip, smooth exit and failure safeguards.
 - [x] Verify playback, automatic exit, skip, reduced motion and mobile layout.
-- [ ] Update only the homepage headline font and replace its description with accessible rotating roles.
-- [ ] Verify role timing, reduced motion and headline fit at desktop, tablet and mobile sizes.
+- [x] Update only the homepage headline font and replace its description with accessible rotating roles.
+- [x] Verify role timing, reduced motion and headline fit at desktop, tablet and mobile sizes.
