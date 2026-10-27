@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { profile } from "@/lib/resume";
+import { Github, Linkedin, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -10,9 +9,20 @@ const links = [
   { href: "#skills", label: "Skills" },
 ];
 
+/* Placeholder profile URLs — replace with the real GitHub and LinkedIn addresses. */
+const socials = [
+  { href: "https://github.com/your-github-username", label: "GitHub", Icon: Github },
+  { href: "https://www.linkedin.com/in/your-linkedin-username", label: "LinkedIn", Icon: Linkedin },
+];
+
+const socialClass =
+  "flex h-11 w-11 items-center justify-center rounded-2xl border border-white/15 bg-white/[0.06] text-foreground/80 shadow-[0_1px_0_0_oklch(1_0_0/0.14)_inset,0_8px_24px_-12px_oklch(0_0_0/0.7)] backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:text-foreground hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
+
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 20);
     on();
@@ -20,59 +30,102 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", on);
   }, []);
 
+  useEffect(() => {
+    const sections = links
+      .map((l) => document.querySelector<HTMLElement>(l.href))
+      .filter((s): s is HTMLElement => Boolean(s));
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+        }
+      },
+      { rootMargin: "-40% 0px -55% 0px" },
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled || open ? "bg-background/80 backdrop-blur-md border-b border-border" : "bg-transparent",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        scrolled || open
+          ? "border-b border-white/5 bg-background/60 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent",
       )}
     >
-      <nav className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between px-5 md:px-8" aria-label="Main">
-        <a href="#top" className="text-xl font-medium tracking-tight text-foreground">
-          yashwanth<span className="text-accent">.</span>
+      <nav
+        className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between gap-4 px-5 md:px-8"
+        aria-label="Main"
+      >
+        <a href="#top" className="site-name shrink-0 text-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
+          Yashwanth
         </a>
-        <ul className="hidden items-center gap-9 md:flex">
+
+        <ul className="hidden items-center gap-10 md:flex">
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="nav-link text-[15px] font-medium text-foreground/85 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
+              <a
+                href={l.href}
+                aria-current={active === l.href ? "true" : undefined}
+                className={cn(
+                  "nav-link text-[15px] font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded",
+                  active === l.href
+                    ? "text-foreground"
+                    : "text-foreground/70 hover:text-foreground",
+                )}
+                style={active === l.href ? { textShadow: "0 0 16px oklch(1 0 0 / 0.35)" } : undefined}
+              >
                 {l.label}
               </a>
             </li>
           ))}
         </ul>
-        <div className="hidden items-center gap-2 md:flex">
-          <a href="/YI.pdf" download className="rounded-lg border border-border bg-secondary px-5 py-2.5 text-[15px] font-medium text-secondary-foreground transition-colors hover:bg-surface-2">
-            Resume
-          </a>
-          <a href={`mailto:${profile.email}`} className="rounded-lg bg-primary px-5 py-2.5 text-[15px] font-medium text-primary-foreground transition-shadow hover:shadow-glow">
-            Contact me
-          </a>
+
+        <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5">
+            {socials.map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={label}
+                className={socialClass}
+              >
+                <Icon size={20} strokeWidth={1.6} />
+              </a>
+            ))}
+          </div>
+          <button
+            className="rounded-md p-2 text-foreground md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
-        <button
-          className="rounded-md p-2 text-foreground md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
       </nav>
+
       {open && (
-        <div id="mobile-menu" className="border-t border-border px-5 pb-6 md:hidden">
+        <div id="mobile-menu" className="border-t border-white/5 px-5 pb-6 pt-2 md:hidden">
           <ul className="flex flex-col py-2">
             {links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} onClick={() => setOpen(false)} className="block py-3 text-lg text-foreground">
+                <a
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-lg text-foreground"
+                >
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <div className="flex gap-2">
-            <a href="/YI.pdf" download className="flex-1 rounded-lg border border-border bg-secondary py-3 text-center font-medium">Resume</a>
-            <a href={`mailto:${profile.email}`} className="flex-1 rounded-lg bg-primary py-3 text-center font-medium text-primary-foreground">Contact me</a>
-          </div>
         </div>
       )}
     </header>

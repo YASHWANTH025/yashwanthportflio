@@ -174,6 +174,16 @@
 .scroll-indicator { position: relative; width: 1px; height: 56px; overflow: hidden; background: oklch(1 0 0 / 14%); }
 .scroll-indicator::after { content: ""; position: absolute; left: 0; top: 0; height: 16px; width: 100%; background: var(--foreground); animation: scroll-dot 2.2s var(--ease-out) infinite; }
 
+/* Signature-style site name with a soft white glow */
+.site-name {
+  font-family: "Caveat", cursive;
+  font-weight: 700;
+  font-size: 1.65rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-shadow: 0 0 16px oklch(1 0 0 / 0.4), 0 0 44px oklch(0.9 0.04 265 / 0.28);
+}
+
 /* Nav link underline sweep */
 .nav-link { position: relative; }
 .nav-link::after { content: ""; position: absolute; left: 0; bottom: -4px; height: 1px; width: 100%; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.45s var(--ease-out); }
@@ -230,12 +240,11 @@
 }
 .portfolio-intro__name {
   margin: 0;
-  font-family: "Bodoni Moda", "Bodoni 72", Didot, serif;
-  font-optical-sizing: auto;
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
   font-size: clamp(28px, 5vw, 56px);
-  font-weight: 500;
   line-height: 1.1;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
   text-align: center;
   opacity: 0;
   transform: translateY(18px);
