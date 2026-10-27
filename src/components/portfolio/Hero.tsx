@@ -1,6 +1,7 @@
 import { Starfield } from "./Starfield";
 import { useParallax } from "./useParallax";
 import { profile } from "@/lib/resume";
+import { ProfessionalRole } from "./ProfessionalRole";
 
 export function Hero() {
   const planetRef = useParallax(-0.12);
@@ -30,7 +31,7 @@ export function Hero() {
         <p className="hero-fade mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-1.5 text-sm text-muted-foreground" style={{ animationDelay: "0.05s" }}>
           <span className="h-1.5 w-1.5 rounded-full bg-accent shadow-glow" /> {profile.name} · {profile.location.split(",")[0]}
         </p>
-        <h1 className="text-halo text-[clamp(2.6rem,7vw,5.6rem)] font-normal leading-[1.05] tracking-[-0.02em] text-foreground">
+        <h1 className="hero-headline text-halo text-foreground">
           <span className="hero-line">
             <span style={{ animationDelay: "0.15s" }}>Turning Ideas</span>
           </span>
@@ -38,9 +39,7 @@ export function Hero() {
             <span style={{ animationDelay: "0.3s" }}>Into Reality.</span>
           </span>
         </h1>
-        <p className="hero-fade mx-auto mt-7 max-w-[620px] text-[clamp(1rem,1.6vw,1.3rem)] leading-relaxed text-muted-foreground" style={{ animationDelay: "0.5s" }}>
-          IT graduate building web apps, offline-first mobile apps, REST APIs and AI-enabled tools with React, Node.js, Java and Flutter.
-        </p>
+        <ProfessionalRole />
         <div className="hero-fade mt-10 mb-28 flex flex-wrap items-center justify-center gap-3" style={{ animationDelay: "0.65s" }}>
           <a href="#projects" className="rounded-xl bg-primary px-7 py-3.5 text-[17px] font-medium text-primary-foreground shadow-glow transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
             View my work
