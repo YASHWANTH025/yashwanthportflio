@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource/anton/latin-400.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -136,6 +137,26 @@
 .hero-line { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
 .hero-line > span { display: block; transform: translateY(112%); animation: hero-line 1.05s var(--ease-out) forwards; }
 .hero-fade { opacity: 0; animation: hero-fade 0.9s var(--ease-out) forwards; }
+
+/* The licensed condensed display face is scoped to this headline only. */
+.hero-headline {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  font-size: 112px;
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+.hero-role { min-height: 1.625em; }
+.hero-role__slot { display: grid; min-height: 1.625em; align-items: center; }
+.hero-role__title { grid-area: 1 / 1; animation: hero-role-cycle 2500ms ease-in-out infinite; }
+@keyframes hero-role-cycle {
+  0% { opacity: 0; transform: translateY(6px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+@media (max-width: 1023px) { .hero-headline { font-size: 96px; } }
+@media (max-width: 639px) { .hero-headline { font-size: 64px; } }
+@media (max-width: 359px) { .hero-headline { font-size: 56px; } }
 
 @utility reveal-mask {
   clip-path: inset(0 0 100% 0);
