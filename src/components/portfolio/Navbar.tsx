@@ -29,7 +29,7 @@ const linkClass = (activeState: boolean) =>
     "nav-link text-[15px] font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded",
     activeState ? "text-foreground" : "text-foreground/70 hover:text-foreground",
   );
-const activeGlow = activeState => (activeState ? { textShadow: "0 0 16px oklch(1 0 0 / 0.35)" } : undefined);
+const activeGlow = (activeState: boolean) => (activeState ? { textShadow: "0 0 16px oklch(1 0 0 / 0.35)" } : undefined);
 
 export function Navbar() {
   const [open, setOpen] = useState(false);

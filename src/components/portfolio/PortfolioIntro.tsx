@@ -4,13 +4,24 @@ import { Button } from "@/components/ui/button";
 import introAsset from "@/assets/portfolio-intro.mp4.asset.json";
 import compatibleIntroAsset from "@/assets/portfolio-intro.webm.asset.json";
 
+/* The film plays once per browser session; in-site navigation back home skips it. */
+const INTRO_SESSION_KEY = "portfolio-intro-played";
+
 export function PortfolioIntro({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<"playing" | "leaving" | "done">("playing");
   const [started, setStarted] = useState(false);
+  const [introChecked, setIntroChecked] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const finish = useCallback(() => setPhase((current) => current === "playing" ? "leaving" : current), []);
 
   useEffect(() => {
+    setIntroChecked(true);
+    try {
+      if (window.sessionStorage.getItem(INTRO_SESSION_KEY)) {
+        setPhase("done");
+        return;
+      }
+    } catch { /* Storage unavailable — the intro plays normally. */ }
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (preference.matches) {
       setPhase("done");
@@ -40,10 +51,17 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
     return () => window.clearTimeout(timeout);
   }, [phase]);
 
+  useEffect(() => {
+    if (phase !== "done") return;
+    try {
+      window.sessionStorage.setItem(INTRO_SESSION_KEY, "1");
+    } catch { /* Storage unavailable — the intro simply plays again next visit. */ }
+  }, [phase]);
+
   return (
     <>
       <div inert={phase !== "done"} aria-hidden={phase !== "done" ? true : undefined}>{children}</div>
-      {phase !== "done" && (
+      {introChecked && phase !== "done" && (
         <section className="portfolio-intro" data-phase={phase} aria-label="Portfolio introduction">
           <div className="portfolio-intro__composition">
             <video
