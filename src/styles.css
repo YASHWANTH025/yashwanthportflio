@@ -158,6 +158,16 @@
 @media (max-width: 639px) { .hero-headline { font-size: 64px; } }
 @media (max-width: 359px) { .hero-headline { font-size: 56px; } }
 
+/* Anton display headline for the standalone sub-pages, matching the hero. */
+.page-headline {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  font-size: clamp(48px, 8vw, 104px);
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+@media (max-width: 359px) { .page-headline { font-size: 44px; } }
+
 @utility reveal-mask {
   clip-path: inset(0 0 100% 0);
   opacity: 0;
