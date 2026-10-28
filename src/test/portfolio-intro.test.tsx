@@ -4,6 +4,7 @@ import { PortfolioIntro } from "@/components/portfolio/PortfolioIntro";
 
 describe("Portfolio introduction", () => {
   beforeEach(() => {
+    window.sessionStorage.clear();
     vi.useFakeTimers();
     vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
   });
@@ -31,5 +32,12 @@ describe("Portfolio introduction", () => {
     act(() => vi.advanceTimersByTime(30000));
     act(() => vi.advanceTimersByTime(700));
     expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
+  });
+
+  it("plays once per session and skips immediately on later visits", () => {
+    window.sessionStorage.setItem("portfolio-intro-played", "1");
+    render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
+    expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
+    expect(screen.getByRole("main")).toBeVisible();
   });
 });

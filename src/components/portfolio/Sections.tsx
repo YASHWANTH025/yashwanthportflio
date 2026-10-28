@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Award, GraduationCap, Mail, MapPin, Phone, Trophy } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { AssistantDemo } from "./AssistantDemo";
@@ -197,24 +198,23 @@ export function Skills() {
             </Reveal>
           ))}
         </div>
-        <div className="mt-16 grid gap-4 lg:grid-cols-2">
-          <Reveal className="rounded-2xl border border-border bg-surface p-6">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground"><Award size={16} /> Certifications</div>
-            <ul className="mt-4 divide-y divide-border">
-              {certifications.map((c) => (
-                <li key={c.name} className="flex items-baseline justify-between gap-4 py-3">
-                  <span>{c.name}<span className="block text-sm text-muted-foreground">{c.by}</span></span>
-                  <span className="font-mono text-xs text-muted-foreground">{c.year}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={120} className="rounded-2xl border border-border bg-surface p-6">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground"><Trophy size={16} /> Achievements & activities</div>
-            <ul className="mt-4 divide-y divide-border">
-              {achievements.map((a) => <li key={a} className="py-3">{a}</li>)}
-            </ul>
-          </Reveal>
+        <div className="mt-16 grid gap-4 sm:grid-cols-2">
+          <Link to="/certifications" className="card-hover group rounded-2xl border border-border bg-card-grad p-6 transition-colors hover:border-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <div className="flex items-center justify-between text-sm text-muted-foreground">
+              <span className="flex items-center gap-2"><Award size={16} /> Certifications</span>
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </div>
+            <p className="mt-4 text-lg">{certifications.length} industry certifications</p>
+            <p className="mt-1 text-sm text-muted-foreground">Oracle, Coursera, Infosys and NPTEL — the full list lives on its own page.</p>
+          </Link>
+          <Link to="/achievements" className="card-hover group rounded-2xl border border-border bg-card-grad p-6 transition-colors hover:border-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <div className="flex items-center justify-between text-sm text-muted-foreground">
+              <span className="flex items-center gap-2"><Trophy size={16} /> Achievements</span>
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </div>
+            <p className="mt-4 text-lg">{achievements.length} honours & activities</p>
+            <p className="mt-1 text-sm text-muted-foreground">Competitions and training milestones from campus life.</p>
+          </Link>
         </div>
       </div>
     </section>
