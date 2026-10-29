@@ -130,7 +130,7 @@ function ProjectBlock({ p, index, total }: { p: (typeof projects)[number]; index
   );
 }
 
-export function Projects() {
+function ProjectsVertical() {
   return (
     <section id="projects" className="relative overflow-hidden px-5 py-28 md:py-36">
       <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/3 -z-0 h-[500px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]" />
@@ -147,6 +147,99 @@ export function Projects() {
       </div>
     </section>
   );
+}
+
+/* One full-width panel per project inside the pinned horizontal track. */
+function ProjectPanel({ p, index, total, active }: { p: (typeof projects)[number]; index: number; total: number; active: boolean }) {
+  return (
+    <article className="project-panel" data-active={active} aria-hidden={!active}>
+      <div className="project-panel__inner">
+        <div>
+          <p className="font-mono text-sm text-muted-foreground">0{index + 1} — 0{total}</p>
+          <h3 className="text-gradient mt-4 text-[clamp(1.9rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">{p.title}</h3>
+          <p className="mt-3 text-lg text-muted-foreground">{p.tagline}</p>
+          <ol className="mt-8 space-y-4">
+            {p.points.map((pt, fi) => (
+              <li key={pt} className="project-feature flex gap-4 text-[15px] leading-relaxed text-foreground/85" style={{ transitionDelay: `${150 + fi * 90}ms` }}>
+                <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">{String(fi + 1).padStart(2, "0")}</span>
+                {pt}
+              </li>
+            ))}
+          </ol>
+          <div className="project-feature mt-8 flex flex-wrap gap-2" style={{ transitionDelay: `${150 + p.points.length * 90}ms` }}>
+            {p.stack.map((s) => (
+              <span key={s} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{s}</span>
+            ))}
+          </div>
+        </div>
+        <div className="project-panel__visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-10">
+          <div className="animate-float"><ProjectVisual id={p.id} /></div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* Desktop: the section pins while the track slides each project in from the
+   right and out to the left, then releases into normal vertical scrolling. */
+function ProjectsHorizontal() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const activeRef = useRef(0);
+  const sectionRef = useScrollProgress<HTMLElement>(
+    useCallback((p) => {
+      const track = trackRef.current;
+      if (track) track.style.transform = `translate3d(${(-p * (projects.length - 1) * 100).toFixed(3)}%, 0, 0)`;
+      const index = Math.min(projects.length - 1, Math.round(p * (projects.length - 1)));
+      if (index !== activeRef.current) {
+        activeRef.current = index;
+        setActive(index);
+      }
+    }, []),
+  );
+  return (
+    <section id="projects" ref={sectionRef} className="projects-scroll" style={{ height: `${projects.length * 85 + 40}vh` }}>
+      <div className="projects-stage">
+        <div className="mx-auto w-full max-w-[1280px]">
+          <Eyebrow>Projects</Eyebrow>
+          <H2>Selected work, end to end.</H2>
+        </div>
+        <div className="projects-track" ref={trackRef}>
+          {projects.map((p, i) => (
+            <ProjectPanel key={p.id} p={p} index={i} total={projects.length} active={i === active} />
+          ))}
+        </div>
+        <div className="mx-auto w-full max-w-[1280px]">
+          <div className="projects-progress" aria-hidden="true">
+            <span style={{ transform: `scaleX(${(active + 1) / projects.length})` }} />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* Wide viewports with motion allowed get the pinned sequence; everyone else
+   keeps the vertical reveal layout. */
+function usePinnedProjects() {
+  const [pinned, setPinned] = useState(false);
+  useEffect(() => {
+    const wide = window.matchMedia("(min-width: 1024px)");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setPinned(wide.matches && !reduced.matches);
+    update();
+    wide.addEventListener("change", update);
+    reduced.addEventListener("change", update);
+    return () => {
+      wide.removeEventListener("change", update);
+      reduced.removeEventListener("change", update);
+    };
+  }, []);
+  return pinned;
+}
+
+export function Projects() {
+  return usePinnedProjects() ? <ProjectsHorizontal /> : <ProjectsVertical />;
 }
 
 export function Experience() {
@@ -194,7 +287,9 @@ export function Skills() {
             <Reveal key={g.group} delay={i * 70} className="card-hover rounded-2xl border border-border bg-card-grad p-6 hover:border-foreground/20">
               <h3 className="text-lg font-medium">{g.group}</h3>
               <div className="mt-4 flex flex-wrap gap-2">
-                {g.items.map((s) => <span key={s} className="rounded-md bg-secondary px-2.5 py-1 text-sm text-foreground/85">{s}</span>)}
+                {g.items.map((s, si) => (
+                  <span key={s} className="skill-chip rounded-md bg-secondary px-2.5 py-1 text-sm text-foreground/85" style={{ transitionDelay: `${200 + si * 60}ms` }}>{s}</span>
+                ))}
               </div>
             </Reveal>
           ))}
