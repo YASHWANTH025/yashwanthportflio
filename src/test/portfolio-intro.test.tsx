@@ -15,7 +15,7 @@ describe("Portfolio introduction", () => {
     const video = container.querySelector("video");
     if (!video) throw new Error("Video missing");
     fireEvent.ended(video);
-    act(() => vi.advanceTimersByTime(700));
+    act(() => vi.advanceTimersByTime(1500));
     expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
     expect(screen.getByRole("main")).toBeVisible();
   });
@@ -23,14 +23,14 @@ describe("Portfolio introduction", () => {
   it("lets visitors skip without waiting for playback", () => {
     render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
     fireEvent.click(screen.getByRole("button", { name: "Skip Intro" }));
-    act(() => vi.advanceTimersByTime(700));
+    act(() => vi.advanceTimersByTime(1500));
     expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
   });
 
   it("cannot trap a visitor when autoplay stalls", () => {
     render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
     act(() => vi.advanceTimersByTime(30000));
-    act(() => vi.advanceTimersByTime(700));
+    act(() => vi.advanceTimersByTime(1500));
     expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
   });
 
