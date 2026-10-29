@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Award, GraduationCap, Mail, MapPin, Phone, Trophy } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { AssistantDemo } from "./AssistantDemo";
+import { useScrollProgress } from "./useScrollProgress";
 import { achievements, certifications, education, experience, profile, projects, skills } from "@/lib/resume";
 import { cn } from "@/lib/utils";
 
