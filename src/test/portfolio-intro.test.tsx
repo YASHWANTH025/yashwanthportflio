@@ -16,6 +16,7 @@ describe("Portfolio introduction", () => {
     if (!video) throw new Error("Video missing");
     fireEvent.ended(video);
     act(() => vi.advanceTimersByTime(1500));
+    act(() => vi.advanceTimersByTime(800));
     expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
     expect(screen.getByRole("main")).toBeVisible();
   });
@@ -24,6 +25,7 @@ describe("Portfolio introduction", () => {
     render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
     fireEvent.click(screen.getByRole("button", { name: "Skip Intro" }));
     act(() => vi.advanceTimersByTime(1500));
+    act(() => vi.advanceTimersByTime(800));
     expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
   });
 
@@ -31,6 +33,7 @@ describe("Portfolio introduction", () => {
     render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
     act(() => vi.advanceTimersByTime(30000));
     act(() => vi.advanceTimersByTime(1500));
+    act(() => vi.advanceTimersByTime(800));
     expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
   });
 
