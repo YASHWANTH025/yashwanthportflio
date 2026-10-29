@@ -11,8 +11,27 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
   const [phase, setPhase] = useState<"playing" | "leaving" | "done">("playing");
   const [started, setStarted] = useState(false);
   const [introChecked, setIntroChecked] = useState(false);
+  const [progress, setProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const finish = useCallback(() => setPhase((current) => current === "playing" ? "leaving" : current), []);
+  const targetRef = useRef(8);
+  const displayedRef = useRef(0);
+  const finishingRef = useRef(false);
+  const finishFallbackRef = useRef(0);
+
+  /* Readiness signals only ever raise the target; the counter never jumps backward. */
+  const raiseTarget = useCallback((value: number) => {
+    targetRef.current = Math.max(targetRef.current, value);
+  }, []);
+
+  const finish = useCallback(() => {
+    if (finishingRef.current) return;
+    finishingRef.current = true;
+    targetRef.current = 100;
+    /* Fallback so a hidden tab (no animation frames) can never trap the visitor. */
+    finishFallbackRef.current = window.setTimeout(() => {
+      setPhase((current) => (current === "playing" ? "leaving" : current));
+    }, 600);
+  }, []);
 
   useEffect(() => {
     setIntroChecked(true);
@@ -29,14 +48,38 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
     }
     const video = videoRef.current;
     if (video) void video.play().then(() => setStarted(true)).catch(() => { /* Skip remains available when autoplay is blocked. */ });
+    if (document.readyState === "complete") raiseTarget(80);
+    else window.addEventListener("load", () => raiseTarget(80), { once: true });
     const timeout = window.setTimeout(finish, 30000);
     const handlePreference = () => { if (preference.matches) setPhase("done"); };
     preference.addEventListener("change", handlePreference);
     return () => {
       window.clearTimeout(timeout);
+      window.clearTimeout(finishFallbackRef.current);
       preference.removeEventListener("change", handlePreference);
     };
-  }, [finish]);
+  }, [finish, raiseTarget]);
+
+  /* Hybrid counter: creeps smoothly toward the readiness target, completes at 100%. */
+  useEffect(() => {
+    if (phase !== "playing") return;
+    let raf = 0;
+    const tick = () => {
+      if (!finishingRef.current && targetRef.current < 90) targetRef.current += 0.02;
+      const target = targetRef.current;
+      displayedRef.current = Math.min(displayedRef.current + Math.max((target - displayedRef.current) * 0.12, 0.15), target);
+      const shown = Math.floor(displayedRef.current);
+      setProgress((current) => (current === shown ? current : shown));
+      if (finishingRef.current && displayedRef.current >= 99.5) {
+        setProgress(100);
+        setPhase("leaving");
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [phase]);
 
   useEffect(() => {
     if (phase === "done") return;
@@ -70,7 +113,9 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
               autoPlay muted playsInline preload="auto"
               disablePictureInPicture
               aria-label="Cinematic 3D opening animation"
-              onPlaying={() => setStarted(true)}
+              onLoadedMetadata={() => raiseTarget(30)}
+              onCanPlay={() => raiseTarget(55)}
+              onPlaying={() => { setStarted(true); raiseTarget(70); }}
               onTimeUpdate={() => setStarted(true)}
               onEnded={finish}
               onError={finish}
@@ -80,6 +125,7 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
             </video>
             <p className="portfolio-intro__name" data-started={started}>YASHWANTH A M</p>
           </div>
+          <p className="portfolio-intro__counter" aria-hidden="true">{String(progress).padStart(2, "0")}%</p>
           <Button variant="ghost" className="portfolio-intro__skip" onClick={finish}>
             Skip Intro <ArrowRight aria-hidden="true" />
           </Button>
