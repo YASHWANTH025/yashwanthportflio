@@ -1,4 +1,4 @@
-- [x] Add the uploaded video opening with name, skip, smooth exit and failure safeguards.
-- [x] Verify playback, automatic exit, skip, reduced motion and mobile layout.
-- [x] Update only the homepage headline font and replace its description with accessible rotating roles.
-- [x] Verify role timing, reduced motion and headline fit at desktop, tablet and mobile sizes.
+- [x] Add hybrid 0–100% loading counter to the video intro (readiness-driven, never traps).
+- [x] Desktop pinned horizontal project sequence (scroll-linked, releases to vertical scroll).
+- [x] Progressive Skills reveal: staggered technology labels per category.
+- [ ] Verify intro counter, project sequence, skills stagger, mobile + reduced motion in browser.
