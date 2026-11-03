@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import introAsset from "@/assets/portfolio-intro.mp4.asset.json";
-import compatibleIntroAsset from "@/assets/portfolio-intro.webm.asset.json";
 
 /* The film plays once per browser session; in-site navigation back home skips it. */
 const INTRO_SESSION_KEY = "portfolio-intro-played";
@@ -40,18 +38,28 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
         setPhase("done");
         return;
       }
-    } catch { /* Storage unavailable — the intro plays normally. */ }
+    } catch {
+      /* Storage unavailable — the intro plays normally. */
+    }
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (preference.matches) {
       setPhase("done");
       return;
     }
     const video = videoRef.current;
-    if (video) void video.play().then(() => setStarted(true)).catch(() => { /* Skip remains available when autoplay is blocked. */ });
+    if (video)
+      void video
+        .play()
+        .then(() => setStarted(true))
+        .catch(() => {
+          /* Skip remains available when autoplay is blocked. */
+        });
     if (document.readyState === "complete") raiseTarget(80);
     else window.addEventListener("load", () => raiseTarget(80), { once: true });
     const timeout = window.setTimeout(finish, 30000);
-    const handlePreference = () => { if (preference.matches) setPhase("done"); };
+    const handlePreference = () => {
+      if (preference.matches) setPhase("done");
+    };
     preference.addEventListener("change", handlePreference);
     return () => {
       window.clearTimeout(timeout);
@@ -67,7 +75,10 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
     const tick = () => {
       if (!finishingRef.current && targetRef.current < 90) targetRef.current += 0.02;
       const target = targetRef.current;
-      displayedRef.current = Math.min(displayedRef.current + Math.max((target - displayedRef.current) * 0.12, 0.15), target);
+      displayedRef.current = Math.min(
+        displayedRef.current + Math.max((target - displayedRef.current) * 0.12, 0.15),
+        target,
+      );
       const shown = Math.floor(displayedRef.current);
       setProgress((current) => (current === shown ? current : shown));
       if (finishingRef.current && displayedRef.current >= 99.5) {
@@ -85,7 +96,9 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
     if (phase === "done") return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = previousOverflow; };
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
   }, [phase]);
 
   useEffect(() => {
@@ -98,34 +111,46 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
     if (phase !== "done") return;
     try {
       window.sessionStorage.setItem(INTRO_SESSION_KEY, "1");
-    } catch { /* Storage unavailable — the intro simply plays again next visit. */ }
+    } catch {
+      /* Storage unavailable — the intro simply plays again next visit. */
+    }
   }, [phase]);
 
   return (
     <>
-      <div inert={phase !== "done"} aria-hidden={phase !== "done" ? true : undefined}>{children}</div>
+      <div inert={phase !== "done"} aria-hidden={phase !== "done" ? true : undefined}>
+        {children}
+      </div>
       {introChecked && phase !== "done" && (
         <section className="portfolio-intro" data-phase={phase} aria-label="Portfolio introduction">
           <div className="portfolio-intro__composition">
             <video
               ref={videoRef}
               className="portfolio-intro__video"
-              autoPlay muted playsInline preload="auto"
+              src="/portfolio-intro.mp4"
+              autoPlay
+              muted
+              playsInline
+              preload="auto"
               disablePictureInPicture
               aria-label="Cinematic 3D opening animation"
               onLoadedMetadata={() => raiseTarget(30)}
               onCanPlay={() => raiseTarget(55)}
-              onPlaying={() => { setStarted(true); raiseTarget(70); }}
+              onPlaying={() => {
+                setStarted(true);
+                raiseTarget(70);
+              }}
               onTimeUpdate={() => setStarted(true)}
               onEnded={finish}
               onError={finish}
-            >
-              <source src={introAsset.url} type="video/mp4" />
-              <source src={compatibleIntroAsset.url} type="video/webm" />
-            </video>
-            <p className="portfolio-intro__name" data-started={started}>YASHWANTH A M</p>
+            />
+            <p className="portfolio-intro__name" data-started={started}>
+              YASHWANTH A M
+            </p>
           </div>
-          <p className="portfolio-intro__counter" aria-hidden="true">{String(progress).padStart(2, "0")}%</p>
+          <p className="portfolio-intro__counter" aria-hidden="true">
+            {String(progress).padStart(2, "0")}%
+          </p>
           <Button variant="ghost" className="portfolio-intro__skip" onClick={finish}>
             Skip Intro <ArrowRight aria-hidden="true" />
           </Button>

@@ -17,7 +17,13 @@ export function Starfield() {
         <span
           key={i}
           className="absolute rounded-full bg-foreground animate-twinkle"
-          style={{ left: `${s.left}%`, top: `${s.top}%`, width: s.size, height: s.size, animationDelay: `${s.delay}s` }}
+          style={{
+            left: `${s.left}%`,
+            top: `${s.top}%`,
+            width: s.size,
+            height: s.size,
+            animationDelay: `${s.delay}s`,
+          }}
         />
       ))}
     </div>

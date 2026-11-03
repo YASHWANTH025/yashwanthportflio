@@ -24,9 +24,14 @@ function Subpage({
       <main>
         <section className="relative isolate overflow-hidden px-5 pb-14 pt-40 md:pt-48">
           <Starfield />
-          <div aria-hidden className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]" />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[420px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]"
+          />
           <Reveal className="mx-auto max-w-[900px]">
-            <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-accent">{eyebrow}</p>
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-accent">
+              {eyebrow}
+            </p>
             <h1 className="page-headline text-halo text-foreground">{title}</h1>
             <p className="mt-5 max-w-[560px] text-lg text-muted-foreground">{blurb}</p>
           </Reveal>
@@ -63,7 +68,9 @@ export function CertificationsPage() {
             className="card-hover rounded-2xl border border-border bg-card-grad p-6 hover:border-foreground/20"
           >
             <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
-              <span className="flex items-center gap-2"><Award size={16} /> {c.by}</span>
+              <span className="flex items-center gap-2">
+                <Award size={16} /> {c.by}
+              </span>
               <span className="font-mono text-xs">{c.year}</span>
             </div>
             <p className="mt-4 text-lg leading-snug">{c.name}</p>
@@ -89,7 +96,9 @@ export function AchievementsPage() {
             delay={i * 80}
             className="card-hover flex gap-4 rounded-2xl border border-border bg-card-grad p-6 hover:border-foreground/20"
           >
-            <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
+            <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">
+              {String(i + 1).padStart(2, "0")}
+            </span>
             <p className="text-[15px] leading-relaxed text-foreground/90">{a}</p>
           </Reveal>
         ))}

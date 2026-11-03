@@ -9,14 +9,43 @@ export const profile = {
 
 export const skills: { group: string; items: string[] }[] = [
   { group: "Programming", items: ["Java", "JavaScript (ES6+)", "SQL", "Dart"] },
-  { group: "Frontend", items: ["HTML5", "CSS3", "React.js", "Bootstrap", "Tailwind CSS", "React Router", "Responsive Design"] },
+  {
+    group: "Frontend",
+    items: [
+      "HTML5",
+      "CSS3",
+      "React.js",
+      "Bootstrap",
+      "Tailwind CSS",
+      "React Router",
+      "Responsive Design",
+    ],
+  },
   { group: "Backend", items: ["Node.js", "Express.js", "REST APIs"] },
   { group: "Databases", items: ["MySQL", "SQLite (Drift)", "Firebase Firestore", "Supabase"] },
   { group: "Mobile & State", items: ["Flutter", "Riverpod"] },
-  { group: "AI & Tools", items: ["Generative AI", "Prompt Engineering", "AI-Assisted Dev", "Git", "GitHub", "VS Code", "Eclipse", "Figma"] },
+  {
+    group: "AI & Tools",
+    items: [
+      "Generative AI",
+      "Prompt Engineering",
+      "AI-Assisted Dev",
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Eclipse",
+      "Figma",
+    ],
+  },
 ];
 
-export type Project = { id: string; title: string; tagline: string; stack: string[]; points: string[] };
+export type Project = {
+  id: string;
+  title: string;
+  tagline: string;
+  stack: string[];
+  points: string[];
+};
 
 export const projects: Project[] = [
   {
@@ -86,7 +115,11 @@ export const certifications = [
   { name: "Oracle OCI AI Foundations Associate", by: "Oracle", year: "2025" },
   { name: "React Front-End Development", by: "Coursera", year: "2025" },
   { name: "Flutter Development", by: "Infosys", year: "2025" },
-  { name: "Strategic Communication for Sustainable Development", by: "NPTEL, IIT Kharagpur", year: "2025" },
+  {
+    name: "Strategic Communication for Sustainable Development",
+    by: "NPTEL, IIT Kharagpur",
+    year: "2025",
+  },
 ];
 
 export const education = {

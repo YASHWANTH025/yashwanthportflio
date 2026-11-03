@@ -12,7 +12,8 @@ export function useParallax<T extends HTMLElement = HTMLDivElement>(speed = 0.1)
     const update = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        if (ref.current) ref.current.style.transform = `translate3d(0, ${window.scrollY * speed}px, 0)`;
+        if (ref.current)
+          ref.current.style.transform = `translate3d(0, ${window.scrollY * speed}px, 0)`;
       });
     };
     update();

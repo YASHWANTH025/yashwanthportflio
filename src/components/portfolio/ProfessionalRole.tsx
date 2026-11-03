@@ -17,15 +17,23 @@ export function ProfessionalRole() {
 
   useEffect(() => {
     if (reducedMotion) return;
-    const timer = window.setInterval(() => setIndex((current) => (current + 1) % roles.length), roleCycleMs);
+    const timer = window.setInterval(
+      () => setIndex((current) => (current + 1) % roles.length),
+      roleCycleMs,
+    );
     return () => window.clearInterval(timer);
   }, [reducedMotion]);
 
   return (
-    <p className="hero-fade hero-role mx-auto mt-7 max-w-[620px] text-lg leading-relaxed text-muted-foreground md:text-xl" style={{ animationDelay: "0.5s" }}>
+    <p
+      className="hero-fade hero-role mx-auto mt-7 max-w-[620px] text-lg leading-relaxed text-muted-foreground md:text-xl"
+      style={{ animationDelay: "0.5s" }}
+    >
       <span className="sr-only">Professional roles: {roles.join(", ")}.</span>
       <span aria-hidden="true" className="hero-role__slot">
-        <span key={index} data-role-index={index} className="hero-role__title">{roles[index]}</span>
+        <span key={index} data-role-index={index} className="hero-role__title">
+          {roles[index]}
+        </span>
       </span>
     </p>
   );

@@ -8,12 +8,27 @@ describe("Portfolio introduction", () => {
     vi.useFakeTimers();
     vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
   });
-  afterEach(() => { cleanup(); vi.useRealTimers(); vi.restoreAllMocks(); });
+  afterEach(() => {
+    cleanup();
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
 
   it("reveals the portfolio when the uploaded film finishes", () => {
-    const { container } = render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
+    const { container } = render(
+      <PortfolioIntro>
+        <main>Portfolio</main>
+      </PortfolioIntro>,
+    );
     const video = container.querySelector("video");
     if (!video) throw new Error("Video missing");
+    expect(video.getAttribute("src")).toBe("/portfolio-intro.mp4");
+    expect(screen.getByText("YASHWANTH A M")).toBeInTheDocument();
+    const name = screen.getByText("YASHWANTH A M");
+    const counter = container.querySelector(".portfolio-intro__counter");
+    expect(counter).not.toBeNull();
+    expect(video.compareDocumentPosition(name) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(counter?.parentElement).toHaveClass("portfolio-intro");
     fireEvent.ended(video);
     act(() => vi.advanceTimersByTime(1500));
     act(() => vi.advanceTimersByTime(800));
@@ -22,7 +37,11 @@ describe("Portfolio introduction", () => {
   });
 
   it("lets visitors skip without waiting for playback", () => {
-    render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
+    render(
+      <PortfolioIntro>
+        <main>Portfolio</main>
+      </PortfolioIntro>,
+    );
     fireEvent.click(screen.getByRole("button", { name: "Skip Intro" }));
     act(() => vi.advanceTimersByTime(1500));
     act(() => vi.advanceTimersByTime(800));
@@ -30,7 +49,11 @@ describe("Portfolio introduction", () => {
   });
 
   it("cannot trap a visitor when autoplay stalls", () => {
-    render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
+    render(
+      <PortfolioIntro>
+        <main>Portfolio</main>
+      </PortfolioIntro>,
+    );
     act(() => vi.advanceTimersByTime(30000));
     act(() => vi.advanceTimersByTime(1500));
     act(() => vi.advanceTimersByTime(800));
@@ -39,7 +62,11 @@ describe("Portfolio introduction", () => {
 
   it("plays once per session and skips immediately on later visits", () => {
     window.sessionStorage.setItem("portfolio-intro-played", "1");
-    render(<PortfolioIntro><main>Portfolio</main></PortfolioIntro>);
+    render(
+      <PortfolioIntro>
+        <main>Portfolio</main>
+      </PortfolioIntro>,
+    );
     expect(screen.queryByRole("region", { name: "Portfolio introduction" })).toBeNull();
     expect(screen.getByRole("main")).toBeVisible();
   });

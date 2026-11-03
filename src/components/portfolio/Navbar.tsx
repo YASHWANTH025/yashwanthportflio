@@ -29,7 +29,8 @@ const linkClass = (activeState: boolean) =>
     "nav-link text-[15px] font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded",
     activeState ? "text-foreground" : "text-foreground/70 hover:text-foreground",
   );
-const activeGlow = (activeState: boolean) => (activeState ? { textShadow: "0 0 16px oklch(1 0 0 / 0.35)" } : undefined);
+const activeGlow = (activeState: boolean) =>
+  activeState ? { textShadow: "0 0 16px oklch(1 0 0 / 0.35)" } : undefined;
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -74,8 +75,16 @@ export function Navbar() {
         className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between gap-4 px-5 md:px-8"
         aria-label="Main"
       >
-        <Link to="/" className="site-name shrink-0 text-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
-          Yashwanth
+        <Link
+          to="/"
+          className="site-name shrink-0 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+          aria-label="Yashwanth home"
+        >
+          <img
+            src="/Monochrome%20Yashwanth%20Wing%20Emblem.png"
+            alt="Yashwanth wing emblem"
+            className="h-11 w-auto object-contain drop-shadow-[0_0_18px_rgba(255,255,255,0.2)]"
+          />
         </Link>
 
         <ul className="hidden items-center gap-7 lg:flex">
@@ -138,14 +147,24 @@ export function Navbar() {
           <ul className="flex flex-col py-2">
             {sectionLinks.map((l) => (
               <li key={l.hash}>
-                <Link to="/" hash={l.hash} hashScrollIntoView onClick={() => setOpen(false)} className="block py-3 text-lg text-foreground">
+                <Link
+                  to="/"
+                  hash={l.hash}
+                  hashScrollIntoView
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-lg text-foreground"
+                >
                   {l.label}
                 </Link>
               </li>
             ))}
             {pageLinks.map((l) => (
               <li key={l.to}>
-                <Link to={l.to} onClick={() => setOpen(false)} className="block py-3 text-lg text-foreground">
+                <Link
+                  to={l.to}
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-lg text-foreground"
+                >
                   {l.label}
                 </Link>
               </li>

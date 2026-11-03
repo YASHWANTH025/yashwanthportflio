@@ -2,29 +2,49 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Award, GraduationCap, Mail, MapPin, Phone, Trophy } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { AssistantDemo } from "./AssistantDemo";
 import { useScrollProgress } from "./useScrollProgress";
-import { achievements, certifications, education, experience, profile, projects, skills } from "@/lib/resume";
+import {
+  achievements,
+  certifications,
+  education,
+  experience,
+  profile,
+  projects,
+  skills,
+} from "@/lib/resume";
 import { cn } from "@/lib/utils";
 
 function Eyebrow({ children }: { children: string }) {
-  return <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-accent">{children}</p>;
+  return (
+    <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-accent">{children}</p>
+  );
 }
 function H2({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-gradient text-[clamp(2rem,4.5vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em]">{children}</h2>;
+  return (
+    <h2 className="text-gradient text-[clamp(2rem,4.5vw,3.5rem)] font-normal leading-[1.08] tracking-[-0.02em]">
+      {children}
+    </h2>
+  );
 }
 
 export function About() {
   return (
-    <section id="about" className="relative overflow-hidden bg-section px-5 py-28 md:py-36">
-      <div className="mx-auto max-w-[1280px]">
-        <Reveal className="mx-auto max-w-[760px] text-center">
-          <Eyebrow>About</Eyebrow>
-          <H2>I build products that explain themselves.</H2>
-          <p className="mx-auto mt-6 max-w-[620px] text-lg leading-relaxed text-muted-foreground">{profile.summary}</p>
-        </Reveal>
-        <Reveal className="mt-16" delay={150} variant="mask">
-          <AssistantDemo />
+    <section
+      id="about"
+      className="relative overflow-hidden bg-section px-5 pt-14 pb-8 sm:px-6 sm:pt-16 sm:pb-10 lg:px-8 lg:pt-20 lg:pb-12"
+    >
+      <div className="mx-auto max-w-[1120px]">
+        <Reveal className="mx-auto max-w-[950px] text-center">
+          <p className="mb-5 text-sm font-medium uppercase tracking-[0.18em] text-accent md:mb-6">
+            About Me
+          </p>
+          <p className="mx-auto mt-5 max-w-[760px] text-[clamp(1.125rem,1.6vw,1.25rem)] leading-[1.7] text-muted-foreground md:mt-6">
+            I am a B.Tech graduate in Information Technology with skills in Java, JavaScript, SQL,
+            and full-stack development. Currently pursuing Java Full Stack training at TAP Academy,
+            I focus on building responsive web applications, REST APIs, interactive dashboards, and
+            backend solutions. I enjoy solving problems, learning new technologies, and transforming
+            ideas into practical applications.
+          </p>
         </Reveal>
       </div>
     </section>
@@ -40,12 +60,19 @@ function ProjectVisual({ id }: { id: string }) {
           <p className="text-2xl font-light">₹12,480</p>
           <div className="mt-4 flex h-20 items-end gap-1.5">
             {[40, 65, 35, 80, 55, 90].map((h, i) => (
-              <div key={i} className="flex-1 rounded-sm bg-foreground/70" style={{ height: `${h}%`, opacity: 0.35 + i * 0.1 }} />
+              <div
+                key={i}
+                className="flex-1 rounded-sm bg-foreground/70"
+                style={{ height: `${h}%`, opacity: 0.35 + i * 0.1 }}
+              />
             ))}
           </div>
           <div className="mt-4 space-y-2">
             {["Morning run", "Read 20 min"].map((t, i) => (
-              <div key={t} className="flex items-center justify-between rounded-lg bg-secondary px-3 py-2 text-xs">
+              <div
+                key={t}
+                className="flex items-center justify-between rounded-lg bg-secondary px-3 py-2 text-xs"
+              >
                 {t} <span className="text-accent">🔥 {7 - i * 3}</span>
               </div>
             ))}
@@ -56,11 +83,16 @@ function ProjectVisual({ id }: { id: string }) {
   if (id === "portal")
     return (
       <div className="rounded-xl border border-border bg-background p-4 shadow-card">
-        <div className="mb-3 flex items-center justify-between text-xs text-muted-foreground"><span>Department reports</span><span className="rounded bg-secondary px-2 py-0.5">Export PDF</span></div>
+        <div className="mb-3 flex items-center justify-between text-xs text-muted-foreground">
+          <span>Department reports</span>
+          <span className="rounded bg-secondary px-2 py-0.5">Export PDF</span>
+        </div>
         {["Computer Science", "Information Tech", "Mechanical", "Civil"].map((d, i) => (
           <div key={d} className="flex items-center gap-3 border-t border-border py-2.5 text-sm">
             <span className="flex-1">{d}</span>
-            <div className="h-1.5 w-24 overflow-hidden rounded-full bg-secondary"><div className="h-full bg-foreground/70" style={{ width: `${90 - i * 18}%` }} /></div>
+            <div className="h-1.5 w-24 overflow-hidden rounded-full bg-secondary">
+              <div className="h-full bg-foreground/70" style={{ width: `${90 - i * 18}%` }} />
+            </div>
           </div>
         ))}
       </div>
@@ -69,16 +101,35 @@ function ProjectVisual({ id }: { id: string }) {
     <div className="rounded-xl border border-border bg-background p-4 shadow-card">
       <p className="text-xs text-muted-foreground">Resume vs. role</p>
       <div className="mt-3 flex items-center gap-4">
-        <div className="relative grid h-20 w-20 place-items-center rounded-full" style={{ background: "conic-gradient(var(--foreground) 0 78%, var(--secondary) 78% 100%)" }}>
-          <div className="grid h-16 w-16 place-items-center rounded-full bg-background text-xl font-light">78</div>
+        <div
+          className="relative grid h-20 w-20 place-items-center rounded-full"
+          style={{
+            background: "conic-gradient(var(--foreground) 0 78%, var(--secondary) 78% 100%)",
+          }}
+        >
+          <div className="grid h-16 w-16 place-items-center rounded-full bg-background text-xl font-light">
+            78
+          </div>
         </div>
-        <div className="space-y-1.5 text-xs text-muted-foreground"><p>✓ 12 matched skills</p><p>• 3 missing keywords</p><p>• 4 recommendations</p></div>
+        <div className="space-y-1.5 text-xs text-muted-foreground">
+          <p>✓ 12 matched skills</p>
+          <p>• 3 missing keywords</p>
+          <p>• 4 recommendations</p>
+        </div>
       </div>
     </div>
   );
 }
 
-function ProjectBlock({ p, index, total }: { p: (typeof projects)[number]; index: number; total: number }) {
+function ProjectBlock({
+  p,
+  index,
+  total,
+}: {
+  p: (typeof projects)[number];
+  index: number;
+  total: number;
+}) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -98,31 +149,53 @@ function ProjectBlock({ p, index, total }: { p: (typeof projects)[number]; index
   }, []);
 
   return (
-    <article ref={ref} data-visible={visible} className="project-block border-t border-border py-20 md:py-28">
+    <article
+      ref={ref}
+      data-visible={visible}
+      className="project-block border-t border-border py-20 md:py-28"
+    >
       <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
         <div className={cn(index % 2 === 1 && "lg:order-2")}>
           <p className="reveal-fade font-mono text-sm text-muted-foreground" data-visible={visible}>
             0{index + 1} — 0{total}
           </p>
-          <h3 className="text-gradient mt-4 text-[clamp(1.9rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">{p.title}</h3>
+          <h3 className="text-gradient mt-4 text-[clamp(1.9rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+            {p.title}
+          </h3>
           <p className="mt-3 text-lg text-muted-foreground">{p.tagline}</p>
           <ol className="mt-9 space-y-4">
             {p.points.map((pt, fi) => (
-              <li key={pt} className="project-feature flex gap-4 text-[15px] leading-relaxed text-foreground/85" style={{ transitionDelay: `${200 + fi * 110}ms` }}>
-                <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">{String(fi + 1).padStart(2, "0")}</span>
+              <li
+                key={pt}
+                className="project-feature flex gap-4 text-[15px] leading-relaxed text-foreground/85"
+                style={{ transitionDelay: `${200 + fi * 110}ms` }}
+              >
+                <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">
+                  {String(fi + 1).padStart(2, "0")}
+                </span>
                 {pt}
               </li>
             ))}
           </ol>
-          <div className="project-feature mt-9 flex flex-wrap gap-2" style={{ transitionDelay: `${200 + p.points.length * 110}ms` }}>
+          <div
+            className="project-feature mt-9 flex flex-wrap gap-2"
+            style={{ transitionDelay: `${200 + p.points.length * 110}ms` }}
+          >
             {p.stack.map((s) => (
-              <span key={s} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{s}</span>
+              <span
+                key={s}
+                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
+              >
+                {s}
+              </span>
             ))}
           </div>
         </div>
         <div className={cn("project-visual-sticky", index % 2 === 1 && "lg:order-1")}>
           <div className="project-visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-10">
-            <div className="animate-float"><ProjectVisual id={p.id} /></div>
+            <div className="animate-float">
+              <ProjectVisual id={p.id} />
+            </div>
           </div>
         </div>
       </div>
@@ -133,11 +206,17 @@ function ProjectBlock({ p, index, total }: { p: (typeof projects)[number]; index
 function ProjectsVertical() {
   return (
     <section id="projects" className="relative overflow-hidden px-5 py-28 md:py-36">
-      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/3 -z-0 h-[500px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/3 -z-0 h-[500px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]"
+      />
       <div className="relative mx-auto max-w-[1280px]">
         <Reveal className="max-w-[700px]">
           <Eyebrow>Projects</Eyebrow>
-          <H2>Selected work, end to end.</H2>
+          <H2>
+            Building full-stack applications with Java, modern web technologies, and AI-driven
+            solutions.
+          </H2>
         </Reveal>
         <div className="mt-6">
           {projects.map((p, i) => (
@@ -150,30 +229,60 @@ function ProjectsVertical() {
 }
 
 /* One full-width panel per project inside the pinned horizontal track. */
-function ProjectPanel({ p, index, total, active }: { p: (typeof projects)[number]; index: number; total: number; active: boolean }) {
+function ProjectPanel({
+  p,
+  index,
+  total,
+  active,
+}: {
+  p: (typeof projects)[number];
+  index: number;
+  total: number;
+  active: boolean;
+}) {
   return (
     <article className="project-panel" data-active={active} aria-hidden={!active}>
       <div className="project-panel__inner">
         <div>
-          <p className="font-mono text-sm text-muted-foreground">0{index + 1} — 0{total}</p>
-          <h3 className="text-gradient mt-4 text-[clamp(1.9rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">{p.title}</h3>
+          <p className="font-mono text-sm text-muted-foreground">
+            0{index + 1} — 0{total}
+          </p>
+          <h3 className="text-gradient mt-4 text-[clamp(1.9rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+            {p.title}
+          </h3>
           <p className="mt-3 text-lg text-muted-foreground">{p.tagline}</p>
           <ol className="mt-8 space-y-4">
             {p.points.map((pt, fi) => (
-              <li key={pt} className="project-feature flex gap-4 text-[15px] leading-relaxed text-foreground/85" style={{ transitionDelay: `${150 + fi * 90}ms` }}>
-                <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">{String(fi + 1).padStart(2, "0")}</span>
+              <li
+                key={pt}
+                className="project-feature flex gap-4 text-[15px] leading-relaxed text-foreground/85"
+                style={{ transitionDelay: `${150 + fi * 90}ms` }}
+              >
+                <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">
+                  {String(fi + 1).padStart(2, "0")}
+                </span>
                 {pt}
               </li>
             ))}
           </ol>
-          <div className="project-feature mt-8 flex flex-wrap gap-2" style={{ transitionDelay: `${150 + p.points.length * 90}ms` }}>
+          <div
+            className="project-feature mt-8 flex flex-wrap gap-2"
+            style={{ transitionDelay: `${150 + p.points.length * 90}ms` }}
+          >
             {p.stack.map((s) => (
-              <span key={s} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">{s}</span>
+              <span
+                key={s}
+                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
+              >
+                {s}
+              </span>
             ))}
           </div>
         </div>
         <div className="project-panel__visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-10">
-          <div className="animate-float"><ProjectVisual id={p.id} /></div>
+          <div className="animate-float">
+            <ProjectVisual id={p.id} />
+          </div>
         </div>
       </div>
     </article>
@@ -189,7 +298,8 @@ function ProjectsHorizontal() {
   const sectionRef = useScrollProgress<HTMLElement>(
     useCallback((p) => {
       const track = trackRef.current;
-      if (track) track.style.transform = `translate3d(${(-p * (projects.length - 1) * 100).toFixed(3)}%, 0, 0)`;
+      if (track)
+        track.style.transform = `translate3d(${(-p * (projects.length - 1) * 100).toFixed(3)}%, 0, 0)`;
       const index = Math.min(projects.length - 1, Math.round(p * (projects.length - 1)));
       if (index !== activeRef.current) {
         activeRef.current = index;
@@ -198,15 +308,29 @@ function ProjectsHorizontal() {
     }, []),
   );
   return (
-    <section id="projects" ref={sectionRef} className="projects-scroll" style={{ height: `${projects.length * 85 + 40}vh` }}>
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="projects-scroll"
+      style={{ height: `${projects.length * 85 + 40}vh` }}
+    >
       <div className="projects-stage">
         <div className="mx-auto w-full max-w-[1280px]">
           <Eyebrow>Projects</Eyebrow>
-          <H2>Selected work, end to end.</H2>
+          <H2>
+            Building full-stack applications with Java, modern web technologies, and AI-driven
+            solutions.
+          </H2>
         </div>
         <div className="projects-track" ref={trackRef}>
           {projects.map((p, i) => (
-            <ProjectPanel key={p.id} p={p} index={i} total={projects.length} active={i === active} />
+            <ProjectPanel
+              key={p.id}
+              p={p}
+              index={i}
+              total={projects.length}
+              active={i === active}
+            />
           ))}
         </div>
         <div className="mx-auto w-full max-w-[1280px]">
@@ -250,10 +374,14 @@ export function Experience() {
           <Eyebrow>Experience</Eyebrow>
           <H2>Learning by building.</H2>
           <div className="mt-10 rounded-2xl border border-border bg-card-grad p-6">
-            <div className="flex items-center gap-2 text-sm text-muted-foreground"><GraduationCap size={16} /> Education</div>
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <GraduationCap size={16} /> Education
+            </div>
             <p className="mt-3 text-lg">{education.degree}</p>
             <p className="mt-1 text-sm text-muted-foreground">{education.school}</p>
-            <p className="mt-3 font-mono text-xs text-muted-foreground">{education.period} · CGPA {education.cgpa}</p>
+            <p className="mt-3 font-mono text-xs text-muted-foreground">
+              {education.period} · CGPA {education.cgpa}
+            </p>
           </div>
         </Reveal>
         <ol className="relative border-l border-border pl-8">
@@ -264,7 +392,11 @@ export function Experience() {
               <h3 className="mt-2 text-2xl font-normal">{e.role}</h3>
               <p className="text-accent">{e.org}</p>
               <ul className="mt-4 space-y-2">
-                {e.points.map((pt) => <li key={pt} className="leading-relaxed text-muted-foreground">{pt}</li>)}
+                {e.points.map((pt) => (
+                  <li key={pt} className="leading-relaxed text-muted-foreground">
+                    {pt}
+                  </li>
+                ))}
               </ul>
             </Reveal>
           ))}
@@ -277,39 +409,77 @@ export function Experience() {
 export function Skills() {
   return (
     <section id="skills" className="px-5 py-28 md:py-36">
-      <div className="mx-auto max-w-[1280px]">
-        <Reveal className="mx-auto max-w-[700px] text-center">
-          <Eyebrow>Skills</Eyebrow>
-          <H2>A toolkit across the stack.</H2>
+      <div className="mx-auto max-w-[1080px]">
+        <Reveal className="skills-heading mb-12 max-w-[820px] md:mb-16">
+          <p className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-accent">
+            04 / Skills
+          </p>
+          <h2 className="skills-heading__title text-foreground">A toolkit across the stack.</h2>
         </Reveal>
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="skills-list list-none p-0">
           {skills.map((g, i) => (
-            <Reveal key={g.group} delay={i * 70} className="card-hover rounded-2xl border border-border bg-card-grad p-6 hover:border-foreground/20">
-              <h3 className="text-lg font-medium">{g.group}</h3>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {g.items.map((s, si) => (
-                  <span key={s} className="skill-chip rounded-md bg-secondary px-2.5 py-1 text-sm text-foreground/85" style={{ transitionDelay: `${200 + si * 60}ms` }}>{s}</span>
+            <Reveal
+              as="li"
+              key={g.group}
+              delay={i * 100}
+              className="skills-row grid grid-cols-1 gap-2 py-5 md:grid-cols-[170px_minmax(0,1fr)] md:gap-10 md:py-7"
+            >
+              <h3 className="skills-row__label text-accent">{g.group}</h3>
+              <p className="skills-row__technologies">
+                {g.items.map((skill, si) => (
+                  <span
+                    key={skill}
+                    className="skill-chip"
+                    style={{ transitionDelay: `${180 + si * 45}ms` }}
+                  >
+                    {skill}
+                    {si < g.items.length - 1 && (
+                      <span className="skills-row__separator" aria-hidden="true">
+                        ·
+                      </span>
+                    )}
+                  </span>
                 ))}
-              </div>
+              </p>
             </Reveal>
           ))}
-        </div>
-        <div className="mt-16 grid gap-4 sm:grid-cols-2">
-          <Link to="/certifications" className="card-hover group rounded-2xl border border-border bg-card-grad p-6 transition-colors hover:border-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        </ol>
+        <div className="skills-related mt-12 grid gap-x-12 sm:grid-cols-2">
+          <Link
+            to="/certifications"
+            className="skills-related__link group border-t border-border py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
             <div className="flex items-center justify-between text-sm text-muted-foreground">
-              <span className="flex items-center gap-2"><Award size={16} /> Certifications</span>
-              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <span className="flex items-center gap-2">
+                <Award size={16} /> Certifications
+              </span>
+              <ArrowUpRight
+                size={16}
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </div>
-            <p className="mt-4 text-lg">{certifications.length} industry certifications</p>
-            <p className="mt-1 text-sm text-muted-foreground">Oracle, Coursera, Infosys and NPTEL — the full list lives on its own page.</p>
+            <p className="mt-3 text-lg">{certifications.length} industry certifications</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Oracle, Coursera, Infosys and NPTEL — the full list lives on its own page.
+            </p>
           </Link>
-          <Link to="/achievements" className="card-hover group rounded-2xl border border-border bg-card-grad p-6 transition-colors hover:border-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <Link
+            to="/achievements"
+            className="skills-related__link group border-t border-border py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
             <div className="flex items-center justify-between text-sm text-muted-foreground">
-              <span className="flex items-center gap-2"><Trophy size={16} /> Achievements</span>
-              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              <span className="flex items-center gap-2">
+                <Trophy size={16} /> Achievements
+              </span>
+              <ArrowUpRight
+                size={16}
+                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </div>
-            <p className="mt-4 text-lg">{achievements.length} honours & activities</p>
-            <p className="mt-1 text-sm text-muted-foreground">Competitions and training milestones from campus life.</p>
+            <p className="mt-3 text-lg">{achievements.length} honours & activities</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Competitions and training milestones from campus life.
+            </p>
           </Link>
         </div>
       </div>
@@ -320,22 +490,46 @@ export function Skills() {
 export function Contact() {
   return (
     <section id="contact" className="relative isolate overflow-hidden px-5 py-32 md:py-44">
-      <div aria-hidden className="pointer-events-none absolute left-1/2 top-[78%] -z-10 aspect-square w-[160vmax] -translate-x-1/2 rotate-90 rounded-full bg-planet" />
-      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[700px] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow/10 blur-[120px]" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-[78%] -z-10 aspect-square w-[160vmax] -translate-x-1/2 rotate-90 rounded-full bg-planet"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[300px] w-[700px] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-glow/10 blur-[120px]"
+      />
       <Reveal className="mx-auto max-w-[760px] text-center">
-        <h2 className="text-halo text-[clamp(2.2rem,5.5vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em]">Let's build something together.</h2>
-        <p className="mx-auto mt-6 max-w-[520px] text-lg text-muted-foreground">Open to full-stack, frontend and mobile developer roles.</p>
+        <h2 className="text-halo text-[clamp(2.2rem,5.5vw,4.5rem)] font-normal leading-[1.05] tracking-[-0.03em]">
+          Let's build something together.
+        </h2>
+        <p className="mx-auto mt-6 max-w-[520px] text-lg text-muted-foreground">
+          Open to full-stack, frontend and mobile developer roles.
+        </p>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
-          <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[17px] font-medium text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5">
+          <a
+            href={`mailto:${profile.email}`}
+            className="inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-3.5 text-[17px] font-medium text-primary-foreground shadow-glow transition-transform hover:-translate-y-0.5"
+          >
             <Mail size={18} /> Email me
           </a>
-          <a href="/YI.pdf" download className="inline-flex items-center gap-2 rounded-xl border border-border bg-secondary/70 px-7 py-3.5 text-[17px] font-medium transition-colors hover:bg-surface-2">
+          <a
+            href="/YI.pdf"
+            download
+            className="inline-flex items-center gap-2 rounded-xl border border-border bg-secondary/70 px-7 py-3.5 text-[17px] font-medium transition-colors hover:bg-surface-2"
+          >
             Download resume <ArrowUpRight size={18} />
           </a>
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-          <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 hover:text-foreground"><Phone size={14} /> {profile.phone}</a>
-          <span className="inline-flex items-center gap-2"><MapPin size={14} /> {profile.location}</span>
+          <a
+            href={`tel:${profile.phone.replace(/\s/g, "")}`}
+            className="inline-flex items-center gap-2 hover:text-foreground"
+          >
+            <Phone size={14} /> {profile.phone}
+          </a>
+          <span className="inline-flex items-center gap-2">
+            <MapPin size={14} /> {profile.location}
+          </span>
         </div>
       </Reveal>
     </section>
@@ -346,8 +540,12 @@ export function Footer() {
   return (
     <footer className="border-t border-border px-5 py-8">
       <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
-        <span>© {new Date().getFullYear()} {profile.name}</span>
-        <a href={`mailto:${profile.email}`} className="hover:text-foreground">{profile.email}</a>
+        <span>
+          © {new Date().getFullYear()} {profile.name}
+        </span>
+        <a href={`mailto:${profile.email}`} className="hover:text-foreground">
+          {profile.email}
+        </a>
       </div>
     </footer>
   );

@@ -1,6 +1,7 @@
 # Yashwanth Portfolio
 
 ## Features
+
 - Modern UI/UX design
 - Smooth animations and transitions
 - Interactive product demonstrations
@@ -8,6 +9,7 @@
 - Clean and reusable components
 
 ## Tech Stack
+
 - React.js
 - Vite
 - JavaScript
