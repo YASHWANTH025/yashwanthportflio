@@ -408,13 +408,13 @@ export function Experience() {
 
 export function Skills() {
   return (
-    <section id="skills" className="px-5 py-28 md:py-36">
-      <div className="mx-auto max-w-[1080px]">
-        <Reveal className="skills-heading mb-12 max-w-[820px] md:mb-16">
-          <p className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-accent">
+    <section id="skills" className="px-5 py-28 md:py-36" aria-labelledby="skills-title">
+      <div className="mx-auto max-w-[1200px]">
+        <Reveal className="skills-heading mb-16 max-w-[960px] md:mb-20">
+          <p className="skills-heading__number mb-6 font-medium uppercase text-accent">
             04 / Skills
           </p>
-          <h2 className="skills-heading__title text-foreground">A toolkit across the stack.</h2>
+          <h2 id="skills-title" className="skills-heading__title text-foreground">A toolkit across the stack.</h2>
         </Reveal>
         <ol className="skills-list list-none p-0">
           {skills.map((g, i) => (
@@ -422,7 +422,7 @@ export function Skills() {
               as="li"
               key={g.group}
               delay={i * 100}
-              className="skills-row grid grid-cols-1 gap-2 py-5 md:grid-cols-[170px_minmax(0,1fr)] md:gap-10 md:py-7"
+              className="skills-row"
             >
               <h3 className="skills-row__label text-accent">{g.group}</h3>
               <p className="skills-row__technologies">
