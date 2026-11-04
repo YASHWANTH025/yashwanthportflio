@@ -3,4 +3,5 @@
 - [x] Progressive Skills reveal: staggered technology labels per category.
 - [x] Verify intro counter, project sequence, skills stagger, mobile + reduced motion in browser.
 - [x] Refine only Skills editorial spacing, typography and reveals; verify desktop, tablet and mobile.
-- [ ] Replace default browser branding with the existing personal logo and metadata; check platform badge and verify pages.
+- [x] Replace default browser branding with the existing personal logo and metadata; verify all three pages and routing test.
+- [ ] Hide published platform badge — blocked: requires editor access on Pro or higher; platform setting refused the change.
