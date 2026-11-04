@@ -607,8 +607,8 @@
 .skills-row:last-child::after {
   bottom: 0;
 }
-.skills-row[data-visible="true"]::before,
-.skills-row:last-child[data-visible="true"]::after {
+#skills .skills-row[data-visible="true"]::before,
+#skills .skills-row:last-child[data-visible="true"]::after {
   transform: scaleX(1);
   opacity: 1;
 }
@@ -643,7 +643,7 @@
     opacity 0.5s var(--ease-out),
     transform 0.5s var(--ease-out);
 }
-.skills-row[data-visible="true"] .skill-chip {
+#skills .skills-row[data-visible="true"] .skill-chip {
   opacity: 1;
   transform: none;
 }
