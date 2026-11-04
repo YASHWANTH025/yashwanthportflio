@@ -15,11 +15,11 @@ export const Route = createFileRoute("/achievements")({
         property: "og:description",
         content: "Competitions, training and activities of Yashwanth A M.",
       },
-      { property: "og:url", content: "/achievements" },
+      { property: "og:url", content: "https://yashwanthportflio.lovable.app/achievements" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/achievements" }],
+    links: [{ rel: "canonical", href: "https://yashwanthportflio.lovable.app/achievements" }],
   }),
   component: AchievementsPage,
 });
