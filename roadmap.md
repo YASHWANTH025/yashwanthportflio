@@ -1,5 +1,5 @@
 - [x] Add hybrid 0–100% loading counter to the video intro (readiness-driven, never traps).
 - [x] Desktop pinned horizontal project sequence (scroll-linked, releases to vertical scroll).
 - [x] Progressive Skills reveal: staggered technology labels per category.
-- [ ] Verify intro counter, project sequence, skills stagger, mobile + reduced motion in browser.
-- [ ] Refine only Skills editorial spacing, typography and reveals; verify desktop, tablet and mobile.
+- [x] Verify intro counter, project sequence, skills stagger, mobile + reduced motion in browser.
+- [x] Refine only Skills editorial spacing, typography and reveals; verify desktop, tablet and mobile.
