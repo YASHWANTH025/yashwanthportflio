@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Award, GraduationCap, Mail, MapPin, Phone, Trophy } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { useScrollProgress } from "./useScrollProgress";
 import {
   achievements,
   certifications,
@@ -31,19 +30,16 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-section px-5 pt-14 pb-8 sm:px-6 sm:pt-16 sm:pb-10 lg:px-8 lg:pt-20 lg:pb-12"
+      className="relative flex min-h-svh items-center justify-center bg-background px-5 pt-28 pb-20 text-center sm:px-6 lg:px-8"
     >
-      <div className="mx-auto max-w-[1120px]">
-        <Reveal className="mx-auto max-w-[950px] text-center">
-          <p className="mb-5 text-sm font-medium uppercase tracking-[0.18em] text-accent md:mb-6">
-            About Me
-          </p>
-          <p className="mx-auto mt-5 max-w-[760px] text-[clamp(1.125rem,1.6vw,1.25rem)] leading-[1.7] text-muted-foreground md:mt-6">
-            I am a B.Tech graduate in Information Technology with skills in Java, JavaScript, SQL,
-            and full-stack development. Currently pursuing Java Full Stack training at TAP Academy,
-            I focus on building responsive web applications, REST APIs, interactive dashboards, and
-            backend solutions. I enjoy solving problems, learning new technologies, and transforming
-            ideas into practical applications.
+      <div className="mx-auto w-full max-w-[800px]">
+        <Reveal>
+          <p className="mb-5 text-xs font-medium uppercase tracking-[0.18em] text-accent">About</p>
+          <h2 className="mx-auto max-w-[760px] text-gradient text-[clamp(2.5rem,5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+            I build products that explain themselves.
+          </h2>
+          <p className="mx-auto mt-6 max-w-[560px] text-base leading-[1.65] text-muted-foreground">
+            {profile.summary}
           </p>
         </Reveal>
       </div>
@@ -54,11 +50,11 @@ export function About() {
 function ProjectVisual({ id }: { id: string }) {
   if (id === "insight")
     return (
-      <div className="mx-auto w-[210px] rounded-[28px] border border-border bg-background p-3 shadow-card">
-        <div className="rounded-2xl bg-surface p-4">
+      <div className="mx-auto w-[190px] rounded-[28px] border border-border bg-background p-3 shadow-card">
+        <div className="rounded-2xl bg-surface p-3">
           <p className="text-xs text-muted-foreground">This month</p>
           <p className="text-2xl font-light">₹12,480</p>
-          <div className="mt-4 flex h-20 items-end gap-1.5">
+          <div className="mt-3 flex h-16 items-end gap-1.5">
             {[40, 65, 35, 80, 55, 90].map((h, i) => (
               <div
                 key={i}
@@ -67,7 +63,7 @@ function ProjectVisual({ id }: { id: string }) {
               />
             ))}
           </div>
-          <div className="mt-4 space-y-2">
+          <div className="mt-3 space-y-2">
             {["Morning run", "Read 20 min"].map((t, i) => (
               <div
                 key={t}
@@ -152,22 +148,25 @@ function ProjectBlock({
     <article
       ref={ref}
       data-visible={visible}
-      className="project-block border-t border-border py-20 md:py-28"
+      className={cn(
+        "project-block",
+        index === 0 ? "pb-20" : "border-t border-border py-20 md:py-24",
+      )}
     >
       <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
-        <div className={cn(index % 2 === 1 && "lg:order-2")}>
+        <div>
           <p className="reveal-fade font-mono text-sm text-muted-foreground" data-visible={visible}>
             0{index + 1} — 0{total}
           </p>
-          <h3 className="text-gradient mt-4 text-[clamp(1.9rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+          <h3 className="text-gradient mt-4 text-[clamp(2rem,3.2vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.02em]">
             {p.title}
           </h3>
-          <p className="mt-3 text-lg text-muted-foreground">{p.tagline}</p>
+          <p className="mt-3 text-base text-muted-foreground">{p.tagline}</p>
           <ol className="mt-9 space-y-4">
             {p.points.map((pt, fi) => (
               <li
                 key={pt}
-                className="project-feature flex gap-4 text-[15px] leading-relaxed text-foreground/85"
+                className="project-feature flex gap-4 text-sm leading-relaxed text-foreground/85"
                 style={{ transitionDelay: `${200 + fi * 110}ms` }}
               >
                 <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">
@@ -191,8 +190,8 @@ function ProjectBlock({
             ))}
           </div>
         </div>
-        <div className={cn("project-visual-sticky", index % 2 === 1 && "lg:order-1")}>
-          <div className="project-visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-10">
+        <div className="project-visual-sticky">
+          <div className="project-visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-9">
             <div className="animate-float">
               <ProjectVisual id={p.id} />
             </div>
@@ -205,20 +204,17 @@ function ProjectBlock({
 
 function ProjectsVertical() {
   return (
-    <section id="projects" className="relative overflow-hidden px-5 py-28 md:py-36">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/3 -z-0 h-[500px] w-[900px] max-w-full -translate-x-1/2 rounded-full bg-glow/10 blur-[140px]"
-      />
-      <div className="relative mx-auto max-w-[1280px]">
-        <Reveal className="max-w-[700px]">
-          <Eyebrow>Projects</Eyebrow>
-          <H2>
-            Building full-stack applications with Java, modern web technologies, and AI-driven
-            solutions.
-          </H2>
+    <section id="projects" className="bg-background px-5 pt-[72px] pb-20 sm:px-6 md:pb-24 lg:px-8">
+      <div className="mx-auto max-w-[1152px]">
+        <Reveal className="border-b border-border pb-3">
+          <p className="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-accent">
+            Projects
+          </p>
+          <h2 className="text-gradient text-[clamp(2.5rem,5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+            Selected work, end to end.
+          </h2>
         </Reveal>
-        <div className="mt-6">
+        <div className="mt-[104px]">
           {projects.map((p, i) => (
             <ProjectBlock key={p.id} p={p} index={i} total={projects.length} />
           ))}
@@ -228,142 +224,8 @@ function ProjectsVertical() {
   );
 }
 
-/* One full-width panel per project inside the pinned horizontal track. */
-function ProjectPanel({
-  p,
-  index,
-  total,
-  active,
-}: {
-  p: (typeof projects)[number];
-  index: number;
-  total: number;
-  active: boolean;
-}) {
-  return (
-    <article className="project-panel" data-active={active} aria-hidden={!active}>
-      <div className="project-panel__inner">
-        <div>
-          <p className="font-mono text-sm text-muted-foreground">
-            0{index + 1} — 0{total}
-          </p>
-          <h3 className="text-gradient mt-4 text-[clamp(1.9rem,3.5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">
-            {p.title}
-          </h3>
-          <p className="mt-3 text-lg text-muted-foreground">{p.tagline}</p>
-          <ol className="mt-8 space-y-4">
-            {p.points.map((pt, fi) => (
-              <li
-                key={pt}
-                className="project-feature flex gap-4 text-[15px] leading-relaxed text-foreground/85"
-                style={{ transitionDelay: `${150 + fi * 90}ms` }}
-              >
-                <span className="mt-0.5 shrink-0 font-mono text-xs text-accent">
-                  {String(fi + 1).padStart(2, "0")}
-                </span>
-                {pt}
-              </li>
-            ))}
-          </ol>
-          <div
-            className="project-feature mt-8 flex flex-wrap gap-2"
-            style={{ transitionDelay: `${150 + p.points.length * 90}ms` }}
-          >
-            {p.stack.map((s) => (
-              <span
-                key={s}
-                className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
-              >
-                {s}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="project-panel__visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-10">
-          <div className="animate-float">
-            <ProjectVisual id={p.id} />
-          </div>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-/* Desktop: the section pins while the track slides each project in from the
-   right and out to the left, then releases into normal vertical scrolling. */
-function ProjectsHorizontal() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-  const activeRef = useRef(0);
-  const sectionRef = useScrollProgress<HTMLElement>(
-    useCallback((p) => {
-      const track = trackRef.current;
-      if (track)
-        track.style.transform = `translate3d(${(-p * (projects.length - 1) * 100).toFixed(3)}%, 0, 0)`;
-      const index = Math.min(projects.length - 1, Math.round(p * (projects.length - 1)));
-      if (index !== activeRef.current) {
-        activeRef.current = index;
-        setActive(index);
-      }
-    }, []),
-  );
-  return (
-    <section
-      id="projects"
-      ref={sectionRef}
-      className="projects-scroll"
-      style={{ height: `${projects.length * 85 + 40}vh` }}
-    >
-      <div className="projects-stage">
-        <div className="mx-auto w-full max-w-[1280px]">
-          <Eyebrow>Projects</Eyebrow>
-          <H2>
-            Building full-stack applications with Java, modern web technologies, and AI-driven
-            solutions.
-          </H2>
-        </div>
-        <div className="projects-track" ref={trackRef}>
-          {projects.map((p, i) => (
-            <ProjectPanel
-              key={p.id}
-              p={p}
-              index={i}
-              total={projects.length}
-              active={i === active}
-            />
-          ))}
-        </div>
-        <div className="mx-auto w-full max-w-[1280px]">
-          <div className="projects-progress" aria-hidden="true">
-            <span style={{ transform: `scaleX(${(active + 1) / projects.length})` }} />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* Wide viewports with motion allowed get the pinned sequence; everyone else
-   keeps the vertical reveal layout. */
-function usePinnedProjects() {
-  const [pinned, setPinned] = useState(false);
-  useEffect(() => {
-    const wide = window.matchMedia("(min-width: 1024px)");
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setPinned(wide.matches && !reduced.matches);
-    update();
-    wide.addEventListener("change", update);
-    reduced.addEventListener("change", update);
-    return () => {
-      wide.removeEventListener("change", update);
-      reduced.removeEventListener("change", update);
-    };
-  }, []);
-  return pinned;
-}
-
 export function Projects() {
-  return usePinnedProjects() ? <ProjectsHorizontal /> : <ProjectsVertical />;
+  return <ProjectsVertical />;
 }
 
 export function Experience() {
@@ -414,16 +276,13 @@ export function Skills() {
           <p className="skills-heading__number mb-6 font-medium uppercase text-accent">
             04 / Skills
           </p>
-          <h2 id="skills-title" className="skills-heading__title text-foreground">A toolkit across the stack.</h2>
+          <h2 id="skills-title" className="skills-heading__title text-foreground">
+            A toolkit across the stack.
+          </h2>
         </Reveal>
         <ol className="skills-list list-none p-0">
           {skills.map((g, i) => (
-            <Reveal
-              as="li"
-              key={g.group}
-              delay={i * 100}
-              className="skills-row"
-            >
+            <Reveal as="li" key={g.group} delay={i * 100} className="skills-row">
               <h3 className="skills-row__label text-accent">{g.group}</h3>
               <p className="skills-row__technologies">
                 {g.items.map((skill, si) => (

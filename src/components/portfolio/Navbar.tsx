@@ -15,10 +15,9 @@ const pageLinks = [
   { to: "/achievements", label: "Achievements" },
 ] as const;
 
-/* Placeholder profile URLs — replace with the real GitHub and LinkedIn addresses. */
 const socials = [
-  { href: "https://github.com/your-github-username", label: "GitHub", Icon: Github },
-  { href: "https://www.linkedin.com/in/your-linkedin-username", label: "LinkedIn", Icon: Linkedin },
+  { href: "https://github.com/YASHWANTH025", label: "GitHub", Icon: Github },
+  { href: "https://www.linkedin.com/in/yashwanth-a-m/", label: "LinkedIn", Icon: Linkedin },
 ];
 
 const socialClass =
@@ -77,14 +76,16 @@ export function Navbar() {
       >
         <Link
           to="/"
-          className="site-name shrink-0 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+          className="flex shrink-0 items-center gap-2 rounded text-[15px] font-semibold tracking-tight text-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="Yashwanth home"
         >
           <img
-            src="/Monochrome%20Yashwanth%20Wing%20Emblem.png"
-            alt="Yashwanth wing emblem"
-            className="h-11 w-auto object-contain drop-shadow-[0_0_18px_rgba(255,255,255,0.2)]"
+            src="/white-winged-geometric-emblem.png"
+            alt=""
+            aria-hidden="true"
+            className="h-9 w-9 object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.2)] md:h-10 md:w-10"
           />
+          <span>yashwanth.</span>
         </Link>
 
         <ul className="hidden items-center gap-7 lg:flex">
