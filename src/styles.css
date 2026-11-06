@@ -142,12 +142,15 @@
 @utility reveal {
   opacity: 0;
   transform: translateY(24px);
+  filter: blur(5px);
   transition:
     opacity 0.9s var(--ease-out),
-    transform 0.9s var(--ease-out);
+    transform 0.9s var(--ease-out),
+    filter 0.9s var(--ease-out);
   &[data-visible="true"] {
     opacity: 1;
     transform: none;
+    filter: blur(0);
   }
 }
 
@@ -270,7 +273,6 @@
   opacity: 0;
   animation: hero-fade 0.9s var(--ease-out) forwards;
 }
-
 /* The licensed condensed display face is scoped to this headline only. */
 .hero-headline {
   font-family: "Anton", Impact, sans-serif;
@@ -422,10 +424,14 @@
 }
 .project-visual {
   clip-path: inset(0 0 100% 0);
-  transition: clip-path 1.2s var(--ease-out);
+  transform: scale(1.025);
+  transition:
+    clip-path 1.2s var(--ease-out),
+    transform 1.2s var(--ease-out);
 }
 .project-block[data-visible="true"] .project-visual {
   clip-path: inset(0 0 0 0);
+  transform: scale(1);
 }
 @media (min-width: 1024px) {
   .project-visual-sticky {
@@ -440,7 +446,7 @@
     transform 0.5s var(--ease-out),
     border-color 0.5s var(--ease-out);
 }
-.card-hover:hover {
+.card-hover[data-visible="true"]:hover {
   transform: translateY(-4px);
 }
 
@@ -457,6 +463,7 @@
     opacity: 1;
     transform: none;
     clip-path: none;
+    filter: none;
   }
   .hero-line > span,
   .hero-fade {
@@ -469,6 +476,7 @@
     opacity: 1;
     transform: none;
     clip-path: none;
+    filter: none;
   }
   .project-panel .project-feature,
   .project-panel__visual,
@@ -617,19 +625,32 @@
   #skills .skills-heading,
   #skills .skills-row,
   #skills .skill-chip,
+  #skills .skills-related__reveal,
   #skills .skills-row::before,
   #skills .skills-row:last-child::after {
     opacity: 1;
     transform: none;
     transition: none;
   }
+  #skills .skills-related__reveal {
+    filter: none;
+  }
 }
 .skills-related__link {
   display: block;
-  transition: border-color 0.3s ease;
+  transition:
+    transform 350ms var(--ease-out),
+    border-color 350ms var(--ease-out);
 }
 .skills-related__link:hover {
-  border-color: color-mix(in oklch, var(--foreground) 25%, transparent);
+  transform: translateY(-3px);
+  border-color: color-mix(in oklch, var(--accent) 65%, transparent);
+}
+.skills-related__reveal {
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 400ms var(--ease-out),
+    filter 400ms var(--ease-out);
 }
 
 /* Keep captions baked into the uploaded film out of the intro frame. */

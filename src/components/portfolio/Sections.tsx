@@ -30,15 +30,15 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative flex min-h-svh items-center justify-center bg-background px-5 pt-28 pb-20 text-center sm:px-6 lg:px-8"
+      className="relative bg-background px-5 py-20 text-center sm:px-6 md:py-24 lg:px-8"
     >
-      <div className="mx-auto w-full max-w-[800px]">
+      <div className="mx-auto w-full max-w-[1100px]">
         <Reveal>
-          <p className="mb-5 text-xs font-medium uppercase tracking-[0.18em] text-accent">About</p>
-          <h2 className="mx-auto max-w-[760px] text-gradient text-[clamp(2.5rem,5vw,3rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+          <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-accent">About</p>
+          <h2 className="mx-auto max-w-[1000px] text-gradient text-[clamp(2.5rem,5vw,4rem)] font-normal leading-[1.08] tracking-[-0.02em] md:text-[clamp(3.5rem,5vw,4rem)]">
             I build products that explain themselves.
           </h2>
-          <p className="mx-auto mt-6 max-w-[560px] text-base leading-[1.65] text-muted-foreground">
+          <p className="mx-auto mt-6 max-w-[750px] text-[clamp(1.1875rem,1.5vw,1.3125rem)] leading-[1.65] text-muted-foreground">
             {profile.summary}
           </p>
         </Reveal>
@@ -303,43 +303,47 @@ export function Skills() {
             </Reveal>
           ))}
         </ol>
-        <div className="skills-related mt-12 grid gap-x-12 sm:grid-cols-2">
-          <Link
-            to="/certifications"
-            className="skills-related__link group border-t border-border py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <div className="flex items-center justify-between text-sm text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <Award size={16} /> Certifications
-              </span>
-              <ArrowUpRight
-                size={16}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </div>
-            <p className="mt-3 text-lg">{certifications.length} industry certifications</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Oracle, Coursera, Infosys and NPTEL — the full list lives on its own page.
-            </p>
-          </Link>
-          <Link
-            to="/achievements"
-            className="skills-related__link group border-t border-border py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <div className="flex items-center justify-between text-sm text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <Trophy size={16} /> Achievements
-              </span>
-              <ArrowUpRight
-                size={16}
-                className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-              />
-            </div>
-            <p className="mt-3 text-lg">{achievements.length} honours & activities</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              Competitions and training milestones from campus life.
-            </p>
-          </Link>
+        <div className="skills-related mt-12 flex w-full flex-col gap-4">
+          <Reveal className="skills-related__reveal w-full">
+            <Link
+              to="/certifications"
+              className="skills-related__link group border-t border-border py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
+                <span className="flex min-w-0 items-center gap-2">
+                  <Award size={16} className="shrink-0" /> Certifications
+                </span>
+                <ArrowUpRight
+                  size={16}
+                  className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </div>
+              <p className="mt-3 text-lg">{certifications.length} industry certifications</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Oracle, Coursera, Infosys and NPTEL — the full list lives on its own page.
+              </p>
+            </Link>
+          </Reveal>
+          <Reveal className="skills-related__reveal w-full" delay={200}>
+            <Link
+              to="/achievements"
+              className="skills-related__link group border-t border-border py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
+                <span className="flex min-w-0 items-center gap-2">
+                  <Trophy size={16} className="shrink-0" /> Achievements
+                </span>
+                <ArrowUpRight
+                  size={16}
+                  className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </div>
+              <p className="mt-3 text-lg">{achievements.length} honours & activities</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Competitions and training milestones from campus life.
+              </p>
+            </Link>
+          </Reveal>
         </div>
       </div>
     </section>

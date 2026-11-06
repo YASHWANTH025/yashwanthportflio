@@ -76,7 +76,7 @@ export function Navbar() {
       >
         <Link
           to="/"
-          className="flex shrink-0 items-center gap-2 rounded text-[15px] font-semibold tracking-tight text-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex shrink-0 items-center gap-2 rounded text-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="Yashwanth home"
         >
           <img
@@ -85,7 +85,7 @@ export function Navbar() {
             aria-hidden="true"
             className="h-9 w-9 object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.2)] md:h-10 md:w-10"
           />
-          <span>yashwanth.</span>
+          <span className="site-name">Yashwanth</span>
         </Link>
 
         <ul className="hidden items-center gap-7 lg:flex">

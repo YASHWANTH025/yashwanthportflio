@@ -6,7 +6,7 @@ import { ProfessionalRole } from "./ProfessionalRole";
 export function Hero() {
   const planetRef = useParallax(-0.12);
   const orbitRef = useParallax(0.07);
-  const contentRef = useParallax(-0.05);
+  const contentRef = useParallax(-0.05, true);
 
   return (
     <section
@@ -37,7 +37,10 @@ export function Hero() {
         </div>
       </div>
 
-      <div ref={contentRef} className="relative z-10 mx-auto max-w-[1000px] pt-24 text-center">
+      <div
+        ref={contentRef}
+        className="hero-scroll-story relative z-10 mx-auto max-w-[1000px] pt-24 text-center"
+      >
         <p
           className="hero-fade mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-1.5 text-sm text-muted-foreground"
           style={{ animationDelay: "0.05s" }}
