@@ -43,22 +43,25 @@ export type Project = {
   id: string;
   title: string;
   tagline: string;
+  liveUrl?: string;
+  githubUrl?: string;
   stack: string[];
   points: string[];
 };
 
 export const projects: Project[] = [
   {
-    id: "insight",
-    title: "Insight Tracker",
-    tagline: "Offline-first expense & habit tracker",
-    stack: ["Flutter", "Dart", "Drift", "SQLite", "Riverpod", "Supabase"],
+    id: "studyquest",
+    title: "StudyQuest",
+    tagline: "AI-powered exam preparation platform",
+    liveUrl: "https://studyquestsss.netlify.app/",
+    githubUrl: "https://github.com/YASHWANTH025/STUDYQUEST",
+    stack: ["React.js", "JavaScript", "Vite", "Tailwind CSS", "React Router", "Context API"],
     points: [
-      "Expense logging with category-based filtering, search, and CSV export.",
-      "Habit and streak tracking with daily completion insights.",
-      "Spending insights: monthly totals, top categories, and six-month trends.",
-      "Supabase authentication with cloud sync and Row Level Security.",
-      "Fully offline-first — local data stays available without a connection.",
+      "Built a responsive learning platform with interactive quizzes, study materials, and an integrated AI tutor.",
+      "Created reusable frontend components and multi-page navigation with React Router.",
+      "Used Context API and LocalStorage for session persistence, bookmarking, quiz history, and progress tracking.",
+      "Designed and tested responsive learning workflows across screen sizes.",
     ],
   },
   {
@@ -87,6 +90,19 @@ export const projects: Project[] = [
       "Insights dashboard presenting analysis results.",
     ],
   },
+  {
+    id: "insight",
+    title: "Insight Tracker",
+    tagline: "Offline-first expense & habit tracker",
+    stack: ["Flutter", "Dart", "Drift", "SQLite", "Riverpod", "Supabase"],
+    points: [
+      "Expense logging with category-based filtering, search, and CSV export.",
+      "Habit and streak tracking with daily completion insights.",
+      "Spending insights: monthly totals, top categories, and six-month trends.",
+      "Supabase authentication with cloud sync and Row Level Security.",
+      "Fully offline-first — local data stays available without a connection.",
+    ],
+  },
 ];
 
 export const experience = [
@@ -94,6 +110,7 @@ export const experience = [
     role: "Full Stack Java Developer Trainee",
     org: "TAP Academy",
     period: "Jul 2026 – Present",
+    certificate: null,
     points: [
       "Building practical skills in Core Java, Spring Boot, SQL, frontend development, and REST API integration.",
       "Practising debugging, database operations, and application development through technical assignments.",
@@ -103,22 +120,36 @@ export const experience = [
     role: "AI + Sustainability Virtual Intern",
     org: "IBM SkillsBuild / AICTE",
     period: "2025",
+    certificate: null,
     points: [
       "Analyzed AI-based problem statements and developed structured solutions through project-based activities.",
       "Created technical documentation, workflow diagrams, and solution proposals.",
       "Applied AI concepts to explore sustainability challenges and communicate potential solutions.",
     ],
   },
+  {
+    role: "Industry Immersion Program",
+    org: "Alliance School of Advanced Computing, Alliance University",
+    period: "May 2025 – Jul 2025",
+    certificate: "/industry-immersion-program-2025.pdf",
+    points: ["Successfully completed the Industry Immersion Program."],
+  },
 ];
 
 export const certifications = [
-  { name: "Oracle OCI AI Foundations Associate", by: "Oracle", year: "2025" },
-  { name: "React Front-End Development", by: "Coursera", year: "2025" },
-  { name: "Flutter Development", by: "Infosys", year: "2025" },
+  {
+    name: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate",
+    by: "Oracle University",
+    year: "2025",
+    certificate: "/oracle-certified-foundations-associate.pdf",
+  },
+  { name: "React Front-End Development", by: "Coursera", year: "2025", certificate: null },
+  { name: "Flutter Development", by: "Infosys", year: "2025", certificate: null },
   {
     name: "Strategic Communication for Sustainable Development",
     by: "NPTEL, IIT Kharagpur",
     year: "2025",
+    certificate: "/strategic-communication-sustainable-development.pdf",
   },
 ];
 
@@ -130,6 +161,12 @@ export const education = {
 };
 
 export const achievements = [
-  "University Kabaddi Tournament – First Prize (2025), competing against 30+ teams",
-  "Placement Training Bootcamp (2025)",
+  {
+    title: "University Kabaddi Tournament – First Prize (2025), competing against 30+ teams",
+    certificate: null,
+  },
+  {
+    title: "Global Employability Test 2025 — 90 percentile",
+    certificate: "/global-employability-test-2025.pdf",
+  },
 ];

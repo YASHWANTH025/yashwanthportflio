@@ -1,6 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Award, GraduationCap, Mail, MapPin, Phone, Trophy } from "lucide-react";
+import {
+  ArrowUpRight,
+  Award,
+  Github,
+  GraduationCap,
+  Mail,
+  MapPin,
+  Phone,
+  Trophy,
+} from "lucide-react";
 import { Reveal } from "./Reveal";
 import {
   achievements,
@@ -91,6 +100,35 @@ function ProjectVisual({ id }: { id: string }) {
             </div>
           </div>
         ))}
+      </div>
+    );
+  if (id === "studyquest")
+    return (
+      <div className="rounded-xl border border-border bg-background p-4 shadow-card">
+        <div className="flex items-center justify-between gap-3">
+          <div>
+            <p className="text-xs text-muted-foreground">StudyQuest</p>
+            <p className="mt-1 text-lg">Your learning dashboard</p>
+          </div>
+          <span className="rounded-full bg-secondary px-3 py-1 text-xs text-accent">Today</span>
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <div className="rounded-lg bg-surface p-3">
+            <p className="text-xs text-muted-foreground">Quiz progress</p>
+            <p className="mt-1 text-xl">8 / 10</p>
+            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-secondary">
+              <div className="h-full w-4/5 rounded-full bg-foreground/70" />
+            </div>
+          </div>
+          <div className="rounded-lg bg-surface p-3">
+            <p className="text-xs text-muted-foreground">Study streak</p>
+            <p className="mt-1 text-xl">7 days</p>
+          </div>
+        </div>
+        <div className="mt-3 rounded-lg bg-surface p-3">
+          <p className="text-xs text-muted-foreground">Continue learning</p>
+          <p className="mt-1 text-sm">JavaScript · Exam prep</p>
+        </div>
       </div>
     );
   return (
@@ -196,6 +234,32 @@ function ProjectBlock({
               <ProjectVisual id={p.id} />
             </div>
           </div>
+          {(p.liveUrl || p.githubUrl) && (
+            <div className="project-feature mt-5 flex flex-wrap items-center justify-center gap-5">
+              {p.liveUrl && (
+                <a
+                  href={p.liveUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center gap-1.5 text-sm text-foreground/80 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  aria-label={`Open ${p.title} live website in a new tab`}
+                >
+                  Visit live project <ArrowUpRight size={15} />
+                </a>
+              )}
+              {p.githubUrl && (
+                <a
+                  href={p.githubUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center gap-1.5 text-sm text-foreground/80 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  aria-label={`Open ${p.title} GitHub repository in a new tab`}
+                >
+                  <Github size={16} /> View GitHub repo <ArrowUpRight size={15} />
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </article>
@@ -260,6 +324,17 @@ export function Experience() {
                   </li>
                 ))}
               </ul>
+              {e.certificate && (
+                <a
+                  href={e.certificate}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  aria-label={`Open ${e.role} certificate PDF in a new tab`}
+                  className="mt-4 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  View participation certificate <ArrowUpRight size={14} />
+                </a>
+              )}
             </Reveal>
           ))}
         </ol>
@@ -303,43 +378,33 @@ export function Skills() {
             </Reveal>
           ))}
         </ol>
-        <div className="skills-related mt-12 flex w-full flex-col gap-4">
+        <div className="skills-related mx-auto mt-12 flex w-full max-w-[950px] flex-col gap-7">
           <Reveal className="skills-related__reveal w-full">
             <Link
               to="/certifications"
-              className="skills-related__link group border-t border-border py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="skills-related__card flex min-h-[250px] w-full flex-col items-center justify-center rounded-[28px] border p-6 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-8"
             >
-              <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
-                <span className="flex min-w-0 items-center gap-2">
-                  <Award size={16} className="shrink-0" /> Certifications
-                </span>
-                <ArrowUpRight
-                  size={16}
-                  className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </div>
-              <p className="mt-3 text-lg">{certifications.length} industry certifications</p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Oracle, Coursera, Infosys and NPTEL — the full list lives on its own page.
+              <Award size={24} strokeWidth={1.7} className="text-muted-foreground" />
+              <p className="mt-3 text-base text-muted-foreground">Certifications</p>
+              <p className="mt-4 text-[clamp(1.375rem,2.4vw,1.75rem)] font-medium leading-tight text-foreground">
+                {certifications.length} Industry Certifications
+              </p>
+              <p className="mt-3 max-w-[680px] text-base leading-relaxed text-muted-foreground">
+                Oracle, Coursera, Infosys and NPTEL — Explore my professional certifications.
               </p>
             </Link>
           </Reveal>
           <Reveal className="skills-related__reveal w-full" delay={200}>
             <Link
               to="/achievements"
-              className="skills-related__link group border-t border-border py-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="skills-related__card flex min-h-[250px] w-full flex-col items-center justify-center rounded-[28px] border p-6 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-8"
             >
-              <div className="flex items-center justify-between gap-4 text-sm text-muted-foreground">
-                <span className="flex min-w-0 items-center gap-2">
-                  <Trophy size={16} className="shrink-0" /> Achievements
-                </span>
-                <ArrowUpRight
-                  size={16}
-                  className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </div>
-              <p className="mt-3 text-lg">{achievements.length} honours & activities</p>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <Trophy size={24} strokeWidth={1.7} className="text-muted-foreground" />
+              <p className="mt-3 text-base text-muted-foreground">Achievements</p>
+              <p className="mt-4 text-[clamp(1.375rem,2.4vw,1.75rem)] font-medium leading-tight text-foreground">
+                {achievements.length} Honours &amp; Activities
+              </p>
+              <p className="mt-3 max-w-[680px] text-base leading-relaxed text-muted-foreground">
                 Competitions and training milestones from campus life.
               </p>
             </Link>

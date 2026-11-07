@@ -636,21 +636,29 @@
     filter: none;
   }
 }
-.skills-related__link {
-  display: block;
+.skills-related__card {
+  border-color: oklch(1 0 0 / 10%);
+  background: linear-gradient(160deg, #101113, #0b0c0e);
   transition:
     transform 350ms var(--ease-out),
-    border-color 350ms var(--ease-out);
+    border-color 350ms var(--ease-out),
+    background 350ms var(--ease-out);
 }
-.skills-related__link:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in oklch, var(--accent) 65%, transparent);
+.skills-related__card:hover {
+  transform: translateY(-2px);
+  border-color: oklch(1 0 0 / 18%);
+  background: linear-gradient(160deg, #141517, #0d0e10);
 }
 .skills-related__reveal {
   transition:
     opacity 400ms var(--ease-out),
     transform 400ms var(--ease-out),
     filter 400ms var(--ease-out);
+}
+@media (max-width: 639px) {
+  .skills-related__card {
+    padding: 24px;
+  }
 }
 
 /* Keep captions baked into the uploaded film out of the intro frame. */
