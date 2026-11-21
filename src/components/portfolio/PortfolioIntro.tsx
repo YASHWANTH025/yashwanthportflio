@@ -6,7 +6,7 @@ import { publicAsset } from "@/lib/public-asset";
 type IntroPhase = "playing" | "leaving" | "done";
 type PlaybackIssue = "autoplay-blocked" | "unavailable";
 
-const INTRO_EXIT_DURATION_MS = 800;
+const INTRO_EXIT_DURATION_MS = 1400;
 let hasEnteredPortfolioInCurrentDocument = false;
 
 export function PortfolioIntro({ children }: { children: ReactNode }) {

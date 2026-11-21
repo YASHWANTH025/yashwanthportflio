@@ -46,7 +46,10 @@ describe("Portfolio introduction", () => {
     expect(intro).toHaveAttribute("data-phase", "leaving");
     expect(HTMLMediaElement.prototype.pause).toHaveBeenCalled();
 
-    act(() => vi.advanceTimersByTime(800));
+    act(() => vi.advanceTimersByTime(1399));
+    expect(intro).toHaveAttribute("data-phase", "leaving");
+
+    act(() => vi.advanceTimersByTime(1));
 
     expect(container.querySelector(".portfolio-intro")).toBeNull();
     expect(screen.getByRole("main")).toBeVisible();
