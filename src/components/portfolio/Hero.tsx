@@ -68,6 +68,13 @@ export function Hero() {
             View my work
           </a>
           <a
+            href="/resume.pdf"
+            download="Yashwanth_AM_ATS_Resume.pdf"
+            className="rounded-xl border border-border bg-secondary/70 px-7 py-3.5 text-[17px] font-medium text-foreground transition-colors hover:bg-surface-2"
+          >
+            Download Resume
+          </a>
+          <a
             href={`mailto:${profile.email}`}
             className="rounded-xl border border-border bg-secondary/70 px-7 py-3.5 text-[17px] font-medium text-foreground transition-colors hover:bg-surface-2"
           >
