@@ -143,8 +143,36 @@ export const certifications = [
     year: "2025",
     certificate: "/oracle-certified-foundations-associate.pdf",
   },
-  { name: "React Front-End Development", by: "Coursera", year: "2025", certificate: null },
-  { name: "Flutter Development", by: "Infosys", year: "2025", certificate: null },
+  {
+    name: "System Administration and IT Infrastructure Services",
+    by: "Google",
+    year: "2025",
+    certificate: "/coursera-system-administration-it-infrastructure-services.pdf",
+  },
+  {
+    name: "Speak English Professionally: In Person, Online & On the Phone",
+    by: "Georgia Institute of Technology",
+    year: "2024",
+    certificate: "/coursera-speak-english-professionally.pdf",
+  },
+  {
+    name: "Developing Front-End Apps with React",
+    by: "IBM",
+    year: "2025",
+    certificate: "/coursera-developing-front-end-apps-react.pdf",
+  },
+  {
+    name: "Microsoft Azure Developer Associate (AZ-204) Exam Prep",
+    by: "Microsoft",
+    year: "2024",
+    certificate: "/coursera-microsoft-azure-developer-associate-prep.pdf",
+  },
+  {
+    name: "Transformational Leadership for Inclusive Innovation",
+    by: "University of Toronto",
+    year: "2025",
+    certificate: "/coursera-transformational-leadership-inclusive-innovation.pdf",
+  },
   {
     name: "Strategic Communication for Sustainable Development",
     by: "NPTEL, IIT Kharagpur",

@@ -390,7 +390,7 @@ export function Skills() {
                 {certifications.length} Industry Certifications
               </p>
               <p className="mt-3 max-w-[680px] text-base leading-relaxed text-muted-foreground">
-                Oracle, Coursera, Infosys and NPTEL — Explore my professional certifications.
+                Oracle, Google, IBM, Microsoft, Coursera and NPTEL — Explore my professional certifications.
               </p>
             </Link>
           </Reveal>
