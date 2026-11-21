@@ -134,7 +134,7 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
                 <div className="portfolio-intro__progress-track" aria-hidden="true">
                   <span style={{ width: `${progress}%` }} />
                 </div>
-                <span aria-hidden="true">{progress}%</span>
+                <span aria-hidden="true">{progress}</span>
               </div>
             )}
           </div>

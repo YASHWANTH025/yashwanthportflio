@@ -97,6 +97,7 @@ describe("Portfolio introduction", () => {
       button.compareDocumentPosition(progress) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
     expect(progress).toHaveAttribute("aria-valuenow", "40");
+    expect(progress).toHaveTextContent(/^40$/);
 
     Object.defineProperty(video, "currentTime", { configurable: true, value: 10 });
     fireEvent.ended(video);
