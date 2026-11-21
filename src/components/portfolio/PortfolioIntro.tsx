@@ -131,10 +131,7 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
                 aria-valuemax={100}
                 aria-valuenow={progress}
               >
-                <div className="portfolio-intro__progress-track" aria-hidden="true">
-                  <span style={{ width: `${progress}%` }} />
-                </div>
-                <span aria-hidden="true">{progress}</span>
+                <span aria-hidden="true">{progress}%</span>
               </div>
             )}
           </div>
