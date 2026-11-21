@@ -741,6 +741,31 @@
 .portfolio-intro .portfolio-intro__enter:active {
   transform: scale(0.98);
 }
+.portfolio-intro__progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: min(180px, 100%);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.portfolio-intro__progress-track {
+  flex: 1;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 9999px;
+  background: oklch(1 0 0 / 14%);
+}
+.portfolio-intro__progress-track > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: oklch(1 0 0 / 78%);
+  transition: width 200ms linear;
+}
 @media (max-width: 480px) {
   .portfolio-intro__composition {
     padding: 16px;
@@ -758,6 +783,9 @@
     transition: none;
   }
   .portfolio-intro .portfolio-intro__enter {
+    transition: none;
+  }
+  .portfolio-intro__progress-track > span {
     transition: none;
   }
 }

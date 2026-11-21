@@ -14,6 +14,7 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
     hasEnteredPortfolioInCurrentDocument ? "done" : "playing",
   );
   const [playbackIssue, setPlaybackIssue] = useState<PlaybackIssue | null>(null);
+  const [progress, setProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const enterPortfolio = useCallback(() => {
@@ -98,6 +99,16 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
                 preload="metadata"
                 disablePictureInPicture
                 aria-label="Cinematic 3D opening animation"
+                onTimeUpdate={(event) => {
+                  const { currentTime, duration } = event.currentTarget;
+                  if (Number.isFinite(duration) && duration > 0) {
+                    setProgress(Math.min(100, Math.floor((currentTime / duration) * 100)));
+                  }
+                }}
+                onEnded={() => {
+                  setProgress(100);
+                  enterPortfolio();
+                }}
                 onPlaying={() => setPlaybackIssue(null)}
                 onError={() => setPlaybackIssue("unavailable")}
               />
@@ -111,6 +122,21 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
             <Button className="portfolio-intro__enter" onClick={enterPortfolio}>
               Enter Portfolio <ArrowRight aria-hidden="true" />
             </Button>
+            {playbackIssue !== "unavailable" && (
+              <div
+                className="portfolio-intro__progress"
+                role="progressbar"
+                aria-label="Intro video progress"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={progress}
+              >
+                <div className="portfolio-intro__progress-track" aria-hidden="true">
+                  <span style={{ width: `${progress}%` }} />
+                </div>
+                <span aria-hidden="true">{progress}%</span>
+              </div>
+            )}
           </div>
         </section>
       )}

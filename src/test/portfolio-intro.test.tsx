@@ -77,4 +77,36 @@ describe("Portfolio introduction", () => {
     expect(screen.getByRole("status")).toHaveTextContent("The introduction video is unavailable");
     expect(screen.getByRole("button", { name: "Enter Portfolio" })).toBeVisible();
   });
+
+  it("shows playback progress and enters automatically when the video completes", () => {
+    const { container } = render(
+      <PortfolioIntro>
+        <main>Portfolio</main>
+      </PortfolioIntro>,
+    );
+    const video = container.querySelector("video");
+    if (!video) throw new Error("Video missing");
+
+    Object.defineProperty(video, "duration", { configurable: true, value: 10 });
+    Object.defineProperty(video, "currentTime", { configurable: true, value: 4 });
+    fireEvent.timeUpdate(video);
+
+    const button = screen.getByRole("button", { name: "Enter Portfolio" });
+    const progress = screen.getByRole("progressbar", { name: "Intro video progress" });
+    expect(
+      button.compareDocumentPosition(progress) & Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+    expect(progress).toHaveAttribute("aria-valuenow", "40");
+
+    Object.defineProperty(video, "currentTime", { configurable: true, value: 10 });
+    fireEvent.ended(video);
+
+    const intro = screen.getByRole("region", { name: "Portfolio introduction" });
+    expect(progress).toHaveAttribute("aria-valuenow", "100");
+    expect(intro).toHaveAttribute("data-phase", "leaving");
+
+    act(() => vi.advanceTimersByTime(1400));
+    expect(container.querySelector(".portfolio-intro")).toBeNull();
+    expect(screen.getByRole("main")).toBeVisible();
+  });
 });
