@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Github, Linkedin, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { publicAsset } from "@/lib/public-asset";
 
 const sectionLinks = [
   { hash: "about", label: "About" },
@@ -80,7 +81,7 @@ export function Navbar() {
           aria-label="Yashwanth home"
         >
           <img
-            src="/white-winged-geometric-emblem.png"
+            src={publicAsset("/white-winged-geometric-emblem.png")}
             alt=""
             aria-hidden="true"
             className="h-9 w-9 object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.2)] md:h-10 md:w-10"

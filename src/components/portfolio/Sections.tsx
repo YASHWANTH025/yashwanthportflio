@@ -21,6 +21,7 @@ import {
   skills,
 } from "@/lib/resume";
 import { cn } from "@/lib/utils";
+import { publicAsset } from "@/lib/public-asset";
 
 function Eyebrow({ children }: { children: string }) {
   return (
@@ -441,7 +442,7 @@ export function Contact() {
             <Mail size={18} /> Email me
           </a>
           <a
-            href="/YI.pdf"
+            href={publicAsset("/YI.pdf")}
             download
             className="inline-flex items-center gap-2 rounded-xl border border-border bg-secondary/70 px-7 py-3.5 text-[17px] font-medium transition-colors hover:bg-surface-2"
           >

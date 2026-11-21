@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { publicAsset } from "@/lib/public-asset";
 
 /* The film plays once per browser session; in-site navigation back home skips it. */
 const INTRO_SESSION_KEY = "portfolio-intro-played";
@@ -127,7 +128,7 @@ export function PortfolioIntro({ children }: { children: ReactNode }) {
             <video
               ref={videoRef}
               className="portfolio-intro__video"
-              src="/portfolio-intro.mp4"
+              src={publicAsset("/portfolio-intro.mp4")}
               autoPlay
               muted
               playsInline

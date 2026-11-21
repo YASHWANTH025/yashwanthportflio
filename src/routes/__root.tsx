@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { publicAsset } from "../lib/public-asset";
 
 function NotFoundComponent() {
   return (
@@ -62,7 +63,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
             Try again
           </button>
           <a
-            href="/"
+            href={publicAsset("/")}
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
             Go home
@@ -97,21 +98,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico?v=20261105", type: "image/x-icon" },
+      { rel: "icon", href: publicAsset("/favicon.ico?v=20261105"), type: "image/x-icon" },
       {
         rel: "icon",
-        href: "/favicon-32x32.png?v=20261105",
+        href: publicAsset("/favicon-32x32.png?v=20261105"),
         type: "image/png",
         sizes: "32x32",
       },
       {
         rel: "icon",
-        href: "/favicon-16x16.png?v=20261105",
+        href: publicAsset("/favicon-16x16.png?v=20261105"),
         type: "image/png",
         sizes: "16x16",
       },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=20261105", sizes: "180x180" },
-      { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "apple-touch-icon", href: publicAsset("/apple-touch-icon.png?v=20261105"), sizes: "180x180" },
+      { rel: "manifest", href: publicAsset("/site.webmanifest") },
     ],
   }),
   shellComponent: RootShell,

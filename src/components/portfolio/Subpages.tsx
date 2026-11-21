@@ -6,6 +6,7 @@ import { Footer } from "./Sections";
 import { Starfield } from "./Starfield";
 import { Reveal } from "./Reveal";
 import { achievements, certifications } from "@/lib/resume";
+import { publicAsset } from "@/lib/public-asset";
 
 function Subpage({
   eyebrow,
@@ -69,7 +70,7 @@ export function CertificationsPage() {
           >
             {c.certificate ? (
               <a
-                href={c.certificate}
+                href={publicAsset(c.certificate)}
                 target="_blank"
                 rel="noreferrer noopener"
                 aria-label={`Open ${c.name} certificate PDF in a new tab`}
