@@ -38,7 +38,7 @@ export function Reveal({
       ref={ref as never}
       data-visible={visible}
       style={{ transitionDelay: `${delay}ms` }}
-      className={cn(variants[variant], className)}
+      className={cn("reveal-stagger", variants[variant], className)}
     >
       {children}
     </Tag>

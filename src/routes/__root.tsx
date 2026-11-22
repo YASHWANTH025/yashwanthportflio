@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -11,7 +12,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { MotionSystem } from "../components/portfolio/MotionSystem";
+import { reportAppError } from "../lib/error-reporting";
 import { publicAsset } from "../lib/public-asset";
 
 function NotFoundComponent() {
@@ -40,7 +42,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportAppError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
   return (
@@ -111,7 +113,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         type: "image/png",
         sizes: "16x16",
       },
-      { rel: "apple-touch-icon", href: publicAsset("/apple-touch-icon.png?v=20261105"), sizes: "180x180" },
+      {
+        rel: "apple-touch-icon",
+        href: publicAsset("/apple-touch-icon.png?v=20261105"),
+        sizes: "180x180",
+      },
       { rel: "manifest", href: publicAsset("/site.webmanifest") },
     ],
   }),
@@ -137,11 +143,16 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <MotionSystem>
+        <div key={pathname} className="route-transition">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </div>
+      </MotionSystem>
     </QueryClientProvider>
   );
 }

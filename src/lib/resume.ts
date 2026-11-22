@@ -8,22 +8,13 @@ export const profile = {
 };
 
 export const skills: { group: string; items: string[] }[] = [
-  { group: "Programming", items: ["Java", "JavaScript (ES6+)", "SQL", "Dart"] },
+  { group: "Programming", items: ["Java", "JavaScript (ES6+)", "SQL"] },
   {
     group: "Frontend",
-    items: [
-      "HTML5",
-      "CSS3",
-      "React.js",
-      "Bootstrap",
-      "Tailwind CSS",
-      "React Router",
-      "Responsive Design",
-    ],
+    items: ["HTML5", "CSS3", "React.js", "Bootstrap", "Tailwind CSS", "Responsive Design"],
   },
   { group: "Backend", items: ["Node.js", "Express.js", "REST APIs"] },
-  { group: "Databases", items: ["MySQL", "SQLite (Drift)", "Firebase Firestore", "Supabase"] },
-  { group: "Mobile & State", items: ["Flutter", "Riverpod"] },
+  { group: "Databases", items: ["MySQL", "Firebase Firestore", "Supabase"] },
   {
     group: "AI & Tools",
     items: [
@@ -56,10 +47,10 @@ export const projects: Project[] = [
     tagline: "AI-powered exam preparation platform",
     liveUrl: "https://studyquestsss.netlify.app/",
     githubUrl: "https://github.com/YASHWANTH025/STUDYQUEST",
-    stack: ["React.js", "JavaScript", "Vite", "Tailwind CSS", "React Router", "Context API"],
+    stack: ["React.js", "JavaScript", "Vite", "Tailwind CSS", "Context API"],
     points: [
       "Built a responsive learning platform with interactive quizzes, study materials, and an integrated AI tutor.",
-      "Created reusable frontend components and multi-page navigation with React Router.",
+      "Created reusable frontend components and multi-page navigation.",
       "Used Context API and LocalStorage for session persistence, bookmarking, quiz history, and progress tracking.",
       "Designed and tested responsive learning workflows across screen sizes.",
     ],
@@ -94,7 +85,7 @@ export const projects: Project[] = [
     id: "insight",
     title: "Insight Tracker",
     tagline: "Offline-first expense & habit tracker",
-    stack: ["Flutter", "Dart", "Drift", "SQLite", "Riverpod", "Supabase"],
+    stack: ["Supabase"],
     points: [
       "Expense logging with category-based filtering, search, and CSV export.",
       "Habit and streak tracking with daily completion insights.",

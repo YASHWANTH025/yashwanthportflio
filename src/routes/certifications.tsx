@@ -13,13 +13,12 @@ export const Route = createFileRoute("/certifications")({
       { property: "og:title", content: "Certifications — Yashwanth A M" },
       {
         property: "og:description",
-        content: "Oracle, Google, IBM, Microsoft, Coursera and NPTEL certifications earned by Yashwanth A M.",
+        content:
+          "Oracle, Google, IBM, Microsoft, Coursera and NPTEL certifications earned by Yashwanth A M.",
       },
-      { property: "og:url", content: "https://yashwanthportflio.lovable.app/certifications" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://yashwanthportflio.lovable.app/certifications" }],
   }),
   component: CertificationsPage,
 });

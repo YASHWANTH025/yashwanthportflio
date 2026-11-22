@@ -18,19 +18,16 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Portfolio of Yashwanth A M, a Bengaluru-based full-stack and Flutter developer building web apps, REST APIs and AI-enabled tools.",
+          "Portfolio of Yashwanth A M, a Bengaluru-based full-stack developer building web apps, REST APIs and AI-enabled tools.",
       },
       { property: "og:title", content: "Yashwanth A M | Full-Stack Developer" },
       {
         property: "og:description",
-        content:
-          "Projects, experience and skills of Yashwanth A M: React, Node.js, Java, Flutter and AI.",
+        content: "Projects, experience and skills of Yashwanth A M: React, Node.js, Java and AI.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://yashwanthportflio.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://yashwanthportflio.lovable.app/" }],
   }),
   component: Index,
 });

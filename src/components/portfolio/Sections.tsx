@@ -197,10 +197,18 @@ function ProjectBlock({
           <p className="reveal-fade font-mono text-sm text-muted-foreground" data-visible={visible}>
             0{index + 1} — 0{total}
           </p>
-          <h3 className="text-gradient mt-4 text-[clamp(2rem,3.2vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.02em]">
+          <h3
+            className="project-feature text-gradient mt-4 text-[clamp(2rem,3.2vw,2.5rem)] font-normal leading-[1.1] tracking-[-0.02em]"
+            style={{ transitionDelay: "80ms" }}
+          >
             {p.title}
           </h3>
-          <p className="mt-3 text-base text-muted-foreground">{p.tagline}</p>
+          <p
+            className="project-feature mt-3 text-base text-muted-foreground"
+            style={{ transitionDelay: "150ms" }}
+          >
+            {p.tagline}
+          </p>
           <ol className="mt-9 space-y-4">
             {p.points.map((pt, fi) => (
               <li
@@ -230,9 +238,30 @@ function ProjectBlock({
           </div>
         </div>
         <div className="project-visual-sticky">
-          <div className="project-visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-9">
-            <div className="animate-float">
-              <ProjectVisual id={p.id} />
+          <div
+            className="project-visual rounded-3xl border border-border bg-surface p-6 shadow-card md:p-9"
+            onPointerMove={(event) => {
+              if (
+                event.pointerType !== "mouse" ||
+                !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches
+              )
+                return;
+              const bounds = event.currentTarget.getBoundingClientRect();
+              const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+              const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+              event.currentTarget.style.setProperty("--project-tilt-x", `${-y * 3}deg`);
+              event.currentTarget.style.setProperty("--project-tilt-y", `${x * 3}deg`);
+            }}
+            onPointerLeave={(event) => {
+              event.currentTarget.style.setProperty("--project-tilt-x", "0deg");
+              event.currentTarget.style.setProperty("--project-tilt-y", "0deg");
+            }}
+          >
+            <div className="project-visual-depth">
+              <div className="animate-float">
+                <ProjectVisual id={p.id} />
+              </div>
             </div>
           </div>
           {(p.liveUrl || p.githubUrl) && (
@@ -444,7 +473,7 @@ export function Contact() {
           </a>
           <a
             href={publicAsset("/YI.pdf")}
-            download
+            download="Yashwanth-A-M-Resume.pdf"
             className="inline-flex items-center gap-2 rounded-xl border border-border bg-secondary/70 px-7 py-3.5 text-[17px] font-medium transition-colors hover:bg-surface-2"
           >
             Download resume <ArrowUpRight size={18} />
