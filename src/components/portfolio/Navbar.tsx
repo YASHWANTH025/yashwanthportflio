@@ -62,6 +62,15 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
+
   return (
     <header
       className={cn(
@@ -96,6 +105,7 @@ export function Navbar() {
                 to="/"
                 hash={l.hash}
                 hashScrollIntoView
+                data-active={pathname === "/" && active === l.hash ? "true" : undefined}
                 className={linkClass(pathname === "/" && active === l.hash)}
                 style={activeGlow(pathname === "/" && active === l.hash)}
               >
@@ -144,8 +154,14 @@ export function Navbar() {
         </div>
       </nav>
 
-      {open && (
-        <div id="mobile-menu" className="border-t border-white/5 px-5 pb-6 pt-2 lg:hidden">
+      <div
+        id="mobile-menu"
+        className="mobile-menu border-t border-white/5 px-5 lg:hidden"
+        data-open={open}
+        inert={!open}
+        aria-hidden={!open}
+      >
+        <div className="mobile-menu__content">
           <ul className="flex flex-col py-2">
             {sectionLinks.map((l) => (
               <li key={l.hash}>
@@ -173,7 +189,7 @@ export function Navbar() {
             ))}
           </ul>
         </div>
-      )}
+      </div>
     </header>
   );
 }

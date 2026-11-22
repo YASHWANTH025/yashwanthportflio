@@ -1,10 +1,24 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
 
 export function MotionSystem({ children }: { children: ReactNode }) {
+  const progressRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let lenis: Lenis | null = null;
+    let progressFrame = 0;
+
+    const updateScrollProgress = () => {
+      if (progressFrame) return;
+      progressFrame = window.requestAnimationFrame(() => {
+        progressFrame = 0;
+        const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress =
+          scrollableHeight > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollableHeight)) : 0;
+        progressRef.current?.style.setProperty("--scroll-progress", String(progress));
+      });
+    };
 
     const syncMotionPreference = () => {
       if (preference.matches) {
@@ -35,14 +49,25 @@ export function MotionSystem({ children }: { children: ReactNode }) {
       attributeFilter: ["style"],
     });
     preference.addEventListener("change", syncMotionPreference);
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    window.addEventListener("resize", updateScrollProgress);
     syncMotionPreference();
+    updateScrollProgress();
 
     return () => {
       scrollLockObserver.disconnect();
       preference.removeEventListener("change", syncMotionPreference);
+      window.removeEventListener("scroll", updateScrollProgress);
+      window.removeEventListener("resize", updateScrollProgress);
+      window.cancelAnimationFrame(progressFrame);
       lenis?.destroy();
     };
   }, []);
 
-  return children;
+  return (
+    <>
+      <div ref={progressRef} aria-hidden="true" className="scroll-progress" />
+      {children}
+    </>
+  );
 }

@@ -166,6 +166,7 @@ function ProjectBlock({
   total: number;
 }) {
   const ref = useRef<HTMLElement | null>(null);
+  const storyMotionRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -180,7 +181,48 @@ function ProjectBlock({
       { threshold: 0.2 },
     );
     io.observe(el);
-    return () => io.disconnect();
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const compactLayout = window.matchMedia("(max-width: 767px)");
+    let frame = 0;
+    const updateStoryMotion = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const visual = storyMotionRef.current;
+        if (!visual) return;
+        if (reducedMotion.matches || compactLayout.matches) {
+          visual.style.removeProperty("--project-scroll-y");
+          visual.style.removeProperty("--project-scroll-scale");
+          visual.removeAttribute("data-story-active");
+          return;
+        }
+
+        const bounds = el.getBoundingClientRect();
+        const inView = bounds.bottom > 0 && bounds.top < window.innerHeight;
+        visual.toggleAttribute("data-story-active", inView);
+        const range = window.innerHeight + bounds.height;
+        const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / range));
+        const arc = Math.sin(progress * Math.PI);
+        visual.style.setProperty("--project-scroll-y", `${-arc * 18}px`);
+        visual.style.setProperty("--project-scroll-scale", `${1 + arc * 0.025}`);
+      });
+    };
+
+    window.addEventListener("scroll", updateStoryMotion, { passive: true });
+    window.addEventListener("resize", updateStoryMotion);
+    reducedMotion.addEventListener("change", updateStoryMotion);
+    compactLayout.addEventListener("change", updateStoryMotion);
+    updateStoryMotion();
+
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", updateStoryMotion);
+      window.removeEventListener("resize", updateStoryMotion);
+      reducedMotion.removeEventListener("change", updateStoryMotion);
+      compactLayout.removeEventListener("change", updateStoryMotion);
+      window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   return (
@@ -258,9 +300,11 @@ function ProjectBlock({
               event.currentTarget.style.setProperty("--project-tilt-y", "0deg");
             }}
           >
-            <div className="project-visual-depth">
-              <div className="animate-float">
-                <ProjectVisual id={p.id} />
+            <div ref={storyMotionRef} className="project-story-motion">
+              <div className="project-visual-depth">
+                <div className="animate-float">
+                  <ProjectVisual id={p.id} />
+                </div>
               </div>
             </div>
           </div>

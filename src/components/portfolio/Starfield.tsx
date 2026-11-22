@@ -18,11 +18,11 @@ export function Starfield() {
           key={i}
           className="absolute rounded-full bg-foreground animate-twinkle"
           style={{
-            left: `${s.left}%`,
-            top: `${s.top}%`,
-            width: s.size,
-            height: s.size,
-            animationDelay: `${s.delay}s`,
+            left: `${s.left.toFixed(2)}%`,
+            top: `${s.top.toFixed(2)}%`,
+            width: `${s.size}px`,
+            height: `${s.size}px`,
+            animationDelay: `${s.delay.toFixed(3)}s`,
           }}
         />
       ))}
